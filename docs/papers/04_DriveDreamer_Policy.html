@@ -1,0 +1,79 @@
+﻿<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>DriveDreamer-Policy | Paper Report</title>
+    <link rel="stylesheet" href="../styles.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="brand" href="../index.html">World Model Weekly</a>
+      <nav>
+        <a href="../index.html#latest">本周热点</a>
+        <a href="../index.html#papers">论文报告</a>
+        <a href="../index.html#watchlist">重点机构</a>
+        <a href="../index.html#trend">趋势总结</a>
+      </nav>
+    </header>
+    <main class="page-shell">
+      <section class="paper-hero">
+        <a class="back-link" href="../index.html#papers">← 返回本周论文列表</a>
+        <p class="eyebrow">World-Action Model</p>
+        <h1>DriveDreamer-Policy</h1>
+        <div class="paper-actions">
+          <a class="button" href="../../papers/04_DriveDreamer_Policy_2604.01765.pdf" target="_blank" rel="noreferrer">打开原论文 PDF</a>
+        </div>
+      </section>
+      <article class="article-body">
+<h1>04. DriveDreamer-Policy: A Geometry-Grounded World-Action Model for Unified Generation and Planning</h1>
+<h2>Metadata</h2>
+<ul>
+<li>arXiv: https://arxiv.org/abs/2604.01765</li>
+<li>PDF: `../papers/04_DriveDreamer_Policy_2604.01765.pdf`</li>
+<li>Topic: world-action model, autonomous driving, future video generation, depth, planning</li>
+</ul>
+<h2>Core Problem</h2>
+<p>World-action models try to combine VLA-style reasoning with world-model prediction. Existing systems often focus on 2D appearance or latent prediction, but embodied systems need geometric grounding. In driving, a visually plausible imagined future is not enough; planning depends on depth, layout, and motion.</p>
+<h2>Main Idea</h2>
+<p>DriveDreamer-Policy integrates:</p>
+<ul>
+<li>Language instruction processing.</li>
+<li>Multi-view images.</li>
+<li>Action inputs.</li>
+<li>Depth generation.</li>
+<li>Future video generation.</li>
+<li>Motion planning.</li>
+</ul>
+<p>The architecture is modular: a large language model handles instructions and context, while lightweight generators produce depth, future video, and actions.</p>
+<h2>Technical Reading</h2>
+<p>The most important contribution is the explicit coupling of geometry and action. Depth is not merely an auxiliary visualization; it is used to improve future prediction and planning robustness. The system is a concrete example of a world-action model where imagination and control share representation.</p>
+<h2>Experiments And Evidence</h2>
+<p>The paper reports strong performance on Navsim v1 and v2. It also reports improved future video and depth prediction quality, and ablations showing that explicit depth learning improves planning robustness.</p>
+<h2>Strengths</h2>
+<ul>
+<li>Strong embodied-AI framing.</li>
+<li>Unified generation and planning.</li>
+<li>Geometry-aware design improves physical grounding.</li>
+<li>Modular architecture is easier to deploy than a monolithic model.</li>
+</ul>
+<h2>Limitations</h2>
+<ul>
+<li>Driving is structured compared with household robotics.</li>
+<li>Geometry quality can become a bottleneck.</li>
+<li>Language instruction handling may not generalize to messy real-world human interaction without further grounding.</li>
+</ul>
+<h2>Relevance To World Models</h2>
+<p>DriveDreamer-Policy is a clean example of the convergence between world models and VLA systems. It shows how future video generation can become a planning tool rather than a standalone generative model.</p>
+<h2>Product Implication</h2>
+<p>For companion robots, the same architectural pattern is relevant:</p>
+<ul>
+<li>Use language for intent.</li>
+<li>Use perception for scene state.</li>
+<li>Use world prediction for possible futures.</li>
+<li>Use action heads for safe execution.</li>
+</ul>
+      </article>
+    </main>
+  </body>
+</html>

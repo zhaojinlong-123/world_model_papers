@@ -27,6 +27,19 @@ Main paper sources:
 - alphaXiv: `https://www.alphaxiv.org/overview/<id>` or `https://www.alphaxiv.org/resources/<id>`
 - OpenReview: used as a conference/publication cross-check where available, especially LPWM.
 
+## Major Institution Recall Policy
+
+Before freezing each weekly Top 10 list, explicitly scan the following institution channels:
+
+- NVIDIA Research, NVIDIA Cosmos, NVIDIA model cards, NVIDIA Hugging Face orgs
+- Google Research, Google DeepMind, Gemini Robotics, Google model/blog releases
+- Genesis ecosystem pages and repositories
+- Qwen / Alibaba model and technical-report releases
+- DeepSeek model, paper, and technical-report releases
+- Seed / ByteDance research and model releases
+
+If one of these institutions releases a directly relevant world model, video generation model, VLA system, physical AI foundation model, embodied simulator, or major technical report during the week, it should be placed in the candidate pool even if it is not yet indexed cleanly by arXiv search.
+
 ## Selected IDs
 
 ```text

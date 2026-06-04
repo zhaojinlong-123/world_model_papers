@@ -18,13 +18,62 @@ Strictly limiting to 2026-05-28 through 2026-06-04 did not yield 10 high-quality
 - Priority 2: papers crawled or surfaced recently by Hugging Face / alphaXiv / paper aggregators.
 - Priority 3: recent core papers from early 2026 and late 2025 that define the current world-model and video-generation trend.
 
+## Institution Watchlist
+
+Future weekly summaries should explicitly monitor major labs and model providers before finalizing the Top 10 list:
+
+- NVIDIA / Cosmos / SANA
+- Google / Google DeepMind / Gemini Robotics
+- Genesis / simulation and generative physical AI ecosystem
+- Qwen / Alibaba
+- DeepSeek
+- Seed / ByteDance
+
+These institutions should receive a strong recall boost when they publish world models, video generation models, VLA systems, embodied AI models, simulation platforms, or physical AI technical reports. Large-lab releases can enter the weekly hotspot list even when they are first published as a model card, blog post, GitHub repo, or technical report rather than a conventional arXiv paper.
+
 ## Directory
 
 ```text
 papers/   Original PDF files
 reports/  Per-paper analysis reports and weekly summary
 sources/  Source notes and reproducibility records
+docs/     Static website generated from reports
+tools/    Build and push scripts
 ```
+
+## Static Website
+
+The weekly report website is generated into `docs/`.
+
+Build locally:
+
+```powershell
+powershell -ExecutionPolicy Bypass -File .\tools\build_site.ps1
+```
+
+Preview locally:
+
+```powershell
+python -m http.server 5500 --bind 127.0.0.1 --directory .\docs
+```
+
+GitHub Pages recommendation:
+
+```text
+Source: Deploy from a branch
+Branch: main
+Folder: /docs
+```
+
+## Auto Commit And Push
+
+After weekly reports are generated, run:
+
+```powershell
+powershell -ExecutionPolicy Bypass -File .\tools\push_updates.ps1 -Message "Update weekly paper summary"
+```
+
+This script stages `README.md`, `reports`, `sources`, `papers`, `docs`, and `tools`, then commits and pushes changes to GitHub.
 
 ## Selected Papers
 

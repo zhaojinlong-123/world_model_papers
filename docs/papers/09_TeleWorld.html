@@ -1,0 +1,78 @@
+﻿<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>TeleWorld | Paper Report</title>
+    <link rel="stylesheet" href="../styles.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="brand" href="../index.html">World Model Weekly</a>
+      <nav>
+        <a href="../index.html#latest">本周热点</a>
+        <a href="../index.html#papers">论文报告</a>
+        <a href="../index.html#watchlist">重点机构</a>
+        <a href="../index.html#trend">趋势总结</a>
+      </nav>
+    </header>
+    <main class="page-shell">
+      <section class="paper-hero">
+        <a class="back-link" href="../index.html#papers">← 返回本周论文列表</a>
+        <p class="eyebrow">4D World Model</p>
+        <h1>TeleWorld</h1>
+        <div class="paper-actions">
+          <a class="button" href="../../papers/09_TeleWorld_2601.00051.pdf" target="_blank" rel="noreferrer">打开原论文 PDF</a>
+        </div>
+      </section>
+      <article class="article-body">
+<h1>09. TeleWorld: Towards Dynamic Multimodal Synthesis with a 4D World Model</h1>
+<h2>Metadata</h2>
+<ul>
+<li>arXiv: https://arxiv.org/abs/2601.00051</li>
+<li>PDF: `../papers/09_TeleWorld_2601.00051.pdf`</li>
+<li>Topic: 4D world model, multimodal synthesis, dynamic scene reconstruction, memory</li>
+</ul>
+<h2>Core Problem</h2>
+<p>Video generation models can produce impressive clips, but practical world models need long-horizon consistency, interaction, and persistent scene memory. A video-only model may forget spatial layout or drift across time.</p>
+<h2>Main Idea</h2>
+<p>TeleWorld proposes a real-time multimodal 4D world-modeling framework that unifies:</p>
+<ul>
+<li>Video generation.</li>
+<li>Dynamic scene reconstruction.</li>
+<li>Long-term world memory.</li>
+<li>Closed-loop guidance between generation and reconstruction.</li>
+</ul>
+<p>The central paradigm is generation-reconstruction-guidance: generated streams are reconstructed into a dynamic 4D representation, which guides future generation.</p>
+<h2>Technical Reading</h2>
+<p>TeleWorld&#39;s key contribution is the feedback loop. Rather than treating generated video as the final product, it treats video as something that should be reconstructed into a persistent spatial-temporal world state.</p>
+<p>This is highly relevant because world models need memory. If the system cannot preserve object layout, identity, and scene structure over time, it cannot support long-horizon planning or interactive embodiment.</p>
+<h2>Experiments And Evidence</h2>
+<p>The work reports improvements in static and dynamic world understanding, long-term consistency, and real-time generation efficiency. It also uses hierarchical planning and distillation methods to reduce latency.</p>
+<h2>Strengths</h2>
+<ul>
+<li>Moves beyond pure video generation toward 4D state.</li>
+<li>Explicitly addresses memory and closed-loop consistency.</li>
+<li>Relevant to interactive and embodied scenarios.</li>
+<li>Connects generation with reconstruction.</li>
+</ul>
+<h2>Limitations</h2>
+<ul>
+<li>Complex system integration.</li>
+<li>Real-time 4D reconstruction may be compute-intensive.</li>
+<li>Evaluation of &quot;world memory&quot; remains difficult.</li>
+</ul>
+<h2>Relevance To World Models</h2>
+<p>TeleWorld is one of the clearest examples of the direction from video clips to persistent interactive worlds.</p>
+<h2>Product Implication</h2>
+<p>For companion robots, TeleWorld-style architecture is relevant for:</p>
+<ul>
+<li>Remembering room layout.</li>
+<li>Maintaining persistent user/object state.</li>
+<li>Predicting scene evolution over multiple interactions.</li>
+<li>Combining generated imagination with reconstructed real context.</li>
+</ul>
+      </article>
+    </main>
+  </body>
+</html>

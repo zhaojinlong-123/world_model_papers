@@ -1,0 +1,75 @@
+﻿<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Residual Latent Action WM | Paper Report</title>
+    <link rel="stylesheet" href="../styles.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="brand" href="../index.html">World Model Weekly</a>
+      <nav>
+        <a href="../index.html#latest">本周热点</a>
+        <a href="../index.html#papers">论文报告</a>
+        <a href="../index.html#watchlist">重点机构</a>
+        <a href="../index.html#trend">趋势总结</a>
+      </nav>
+    </header>
+    <main class="page-shell">
+      <section class="paper-hero">
+        <a class="back-link" href="../index.html#papers">← 返回本周论文列表</a>
+        <p class="eyebrow">Robot Learning</p>
+        <h1>Residual Latent Action WM</h1>
+        <div class="paper-actions">
+          <a class="button" href="../../papers/03_Visual_Feature_RLA_2605.07079.pdf" target="_blank" rel="noreferrer">打开原论文 PDF</a>
+        </div>
+      </section>
+      <article class="article-body">
+<h1>03. Learning Visual Feature-Based World Models via Residual Latent Action</h1>
+<h2>Metadata</h2>
+<ul>
+<li>arXiv: https://arxiv.org/abs/2605.07079</li>
+<li>PDF: `../papers/03_Visual_Feature_RLA_2605.07079.pdf`</li>
+<li>Topic: feature-based world model, residual latent action, flow matching, robot learning</li>
+</ul>
+<h2>Core Problem</h2>
+<p>Pixel-space video diffusion is expensive and can hallucinate. Feature-based world models are more efficient, but direct feature regression often produces blurry or collapsed predictions in complex interactions. The central question is how to model future visual features without losing temporal and interaction structure.</p>
+<h2>Main Idea</h2>
+<p>The paper introduces Residual Latent Action (RLA), learned from DINO residuals. RLA is used as a predictive representation of temporal progression. The proposed RLA World Model predicts RLA values with flow matching rather than directly regressing future visual features.</p>
+<h2>Technical Reading</h2>
+<p>The interesting move is to treat temporal change itself as a learnable latent action-like object. Instead of asking the model to generate raw future frames, it predicts residual feature dynamics. This gives the model a compact handle on motion and interaction.</p>
+<p>Two robot-learning applications make the work especially relevant:</p>
+<ul>
+<li>A world action model that can learn from actionless demonstration videos.</li>
+<li>A visual RL framework trained inside a world model learned from offline videos only.</li>
+</ul>
+<p>This suggests a route for learning behavior from passive video data, which is important when real robot interaction data is expensive.</p>
+<h2>Experiments And Evidence</h2>
+<p>The paper reports improvements over feature-based baselines and video-diffusion world models on simulation and real-world datasets, while being much faster than pixel-space video diffusion approaches. The most important evidence is not only quality; it is the speed/utility trade-off.</p>
+<h2>Strengths</h2>
+<ul>
+<li>Avoids full pixel generation when feature dynamics are enough.</li>
+<li>Strong robotics relevance.</li>
+<li>Uses passive videos more effectively.</li>
+<li>Offers a path toward offline world-model training.</li>
+</ul>
+<h2>Limitations</h2>
+<ul>
+<li>Feature representations inherit biases from the visual backbone.</li>
+<li>Feature prediction may be less interpretable for human inspection than generated video.</li>
+<li>The method still needs careful alignment between feature dynamics and downstream control.</li>
+</ul>
+<h2>Relevance To World Models</h2>
+<p>RLA-WM points to a key trend: not every world model needs to be a photorealistic video generator. For control, planning, and policy learning, compact predictive features may be more useful than beautiful pixels.</p>
+<h2>Product Implication</h2>
+<p>For a companion robot, this approach can support:</p>
+<ul>
+<li>Learning from large amounts of home-interaction video.</li>
+<li>Predicting interaction consequences without expensive rendering.</li>
+<li>Training policies inside a learned latent simulator before physical testing.</li>
+</ul>
+      </article>
+    </main>
+  </body>
+</html>

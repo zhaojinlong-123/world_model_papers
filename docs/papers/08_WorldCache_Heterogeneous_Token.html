@@ -1,0 +1,78 @@
+﻿<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>WorldCache Token Caching | Paper Report</title>
+    <link rel="stylesheet" href="../styles.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="brand" href="../index.html">World Model Weekly</a>
+      <nav>
+        <a href="../index.html#latest">本周热点</a>
+        <a href="../index.html#papers">论文报告</a>
+        <a href="../index.html#watchlist">重点机构</a>
+        <a href="../index.html#trend">趋势总结</a>
+      </nav>
+    </header>
+    <main class="page-shell">
+      <section class="paper-hero">
+        <a class="back-link" href="../index.html#papers">← 返回本周论文列表</a>
+        <p class="eyebrow">Acceleration</p>
+        <h1>WorldCache Token Caching</h1>
+        <div class="paper-actions">
+          <a class="button" href="../../papers/08_WorldCache_Heterogeneous_Token_2603.06331.pdf" target="_blank" rel="noreferrer">打开原论文 PDF</a>
+        </div>
+      </section>
+      <article class="article-body">
+<h1>08. WorldCache: Accelerating World Models for Free via Heterogeneous Token Caching</h1>
+<h2>Metadata</h2>
+<ul>
+<li>arXiv: https://arxiv.org/abs/2603.06331</li>
+<li>PDF: `../papers/08_WorldCache_Heterogeneous_Token_2603.06331.pdf`</li>
+<li>Hugging Face Papers: https://huggingface.co/papers/2603.06331</li>
+<li>Topic: heterogeneous token caching, diffusion world model acceleration</li>
+</ul>
+<h2>Core Problem</h2>
+<p>Generic diffusion caching policies do not transfer cleanly to world models. World models have multimodal coupling, spatially varying tokens, and non-uniform temporal dynamics. Some tokens are stable, some are predictable, and some are chaotic. Uniform skipping is either unsafe or too conservative.</p>
+<h2>Main Idea</h2>
+<p>This WorldCache variant introduces:</p>
+<ul>
+<li>Curvature-guided heterogeneous token prediction.</li>
+<li>Hermite-guided damped prediction for chaotic tokens.</li>
+<li>Chaotic-prioritized adaptive skipping.</li>
+<li>Curvature-normalized drift estimation.</li>
+</ul>
+<p>The model selectively recomputes only the tokens that begin to drift.</p>
+<h2>Technical Reading</h2>
+<p>This paper focuses on token-level dynamics rather than region-level perceptual caching. The key idea is to classify tokens by temporal behavior:</p>
+<ul>
+<li>Stable tokens can be reused.</li>
+<li>Smooth tokens can be extrapolated.</li>
+<li>Chaotic tokens need careful updating.</li>
+</ul>
+<p>This framing makes caching closer to a lightweight dynamics model.</p>
+<h2>Experiments And Evidence</h2>
+<p>The paper reports up to 3.7x end-to-end speedup while maintaining around 98% rollout quality. The important takeaway is that the speedup comes without retraining, making it attractive for deployment.</p>
+<h2>Strengths</h2>
+<ul>
+<li>Strong speedup.</li>
+<li>Training-free and model-compatible.</li>
+<li>Uses world-model-specific temporal structure.</li>
+<li>Good fit for resource-constrained inference.</li>
+</ul>
+<h2>Limitations</h2>
+<ul>
+<li>Speed-quality trade-off may vary significantly by scene.</li>
+<li>It may be hard to know whether skipped chaotic tokens harm planning until downstream tests are run.</li>
+<li>It does not solve semantic or physical inconsistency.</li>
+</ul>
+<h2>Relevance To World Models</h2>
+<p>This paper reinforces a key trend: inference optimization is now part of world-model research. The best simulator is not just the most accurate but the one that can run fast enough to be useful.</p>
+<h2>Product Implication</h2>
+<p>For robot products, heterogeneous caching could reduce inference cost and enable more frequent world-state prediction under limited compute budgets.</p>
+      </article>
+    </main>
+  </body>
+</html>
