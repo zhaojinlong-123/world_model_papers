@@ -274,6 +274,26 @@ $($watchlistCards -join "`n")
         </div>
       </section>
 
+      <section id="storage" class="section storage-panel">
+        <p class="eyebrow">Storage Design</p>
+        <h2>长期周报的轻量化存储策略</h2>
+        <p>每周 10 篇 PDF 会让仓库快速膨胀。当前策略是长期保存网页、Markdown 分析、来源链接和候选记录；PDF 只保留少量高价值精选，其余通过官方链接访问。</p>
+        <div class="storage-grid">
+          <div>
+            <strong>长期保存</strong>
+            <span>报告、网页、来源链接、候选元数据</span>
+          </div>
+          <div>
+            <strong>选择保存</strong>
+            <span>每周 3-5 篇关键 PDF，避免普通 Git 仓库过大</span>
+          </div>
+          <div>
+            <strong>本地缓存</strong>
+            <span>批量下载放入 local_cache/ 或 tmp_downloads/，不提交</span>
+          </div>
+        </div>
+      </section>
+
       <section id="trend" class="section trend-panel">
         <p class="eyebrow">Trend</p>
         <h2>本周研究趋势</h2>
@@ -334,7 +354,7 @@ nav a:hover { color: var(--mint); }
 h1 { margin: 0; max-width: 980px; font-size: clamp(40px, 7vw, 76px); line-height: 1.04; }
 h2 { margin: 0; font-size: clamp(28px, 4vw, 44px); line-height: 1.14; }
 h3 { margin: 0; font-size: 20px; line-height: 1.3; }
-.lead, .section-heading p, .trend-panel p, .article-body p, .hotspot-card p, .watch-card p { color: var(--muted); }
+.lead, .section-heading p, .trend-panel p, .storage-panel p, .article-body p, .hotspot-card p, .watch-card p { color: var(--muted); }
 .lead { max-width: 780px; font-size: 19px; }
 .hero-actions, .paper-actions, .card-actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 24px; }
 .search-section {
@@ -408,13 +428,34 @@ h3 { margin: 0; font-size: 20px; line-height: 1.3; }
   gap: 16px;
 }
 .paper-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-.hotspot-card, .paper-card, .watch-card, .trend-panel, .article-body {
+.hotspot-card, .paper-card, .watch-card, .storage-panel, .trend-panel, .article-body {
   border: 1px solid var(--line);
   border-radius: 8px;
   background: var(--panel);
   box-shadow: 0 18px 54px rgba(0,0,0,0.2);
 }
-.hotspot-card, .watch-card, .trend-panel, .article-body { padding: 24px; }
+.hotspot-card, .watch-card, .storage-panel, .trend-panel, .article-body { padding: 24px; }
+.storage-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+  margin-top: 20px;
+}
+.storage-grid div {
+  display: grid;
+  gap: 6px;
+  padding: 16px;
+  border: 1px solid rgba(98, 230, 255, 0.16);
+  border-radius: 8px;
+  background: rgba(7, 16, 24, 0.42);
+}
+.storage-grid strong {
+  color: var(--mint);
+}
+.storage-grid span {
+  color: var(--muted);
+  font-size: 14px;
+}
 .paper-card {
   display: grid;
   grid-template-columns: 54px minmax(0, 1fr);
@@ -448,6 +489,7 @@ h3 { margin: 0; font-size: 20px; line-height: 1.3; }
   .hotspot-grid, .paper-grid, .watch-grid { grid-template-columns: 1fr; }
   .site-header { align-items: flex-start; flex-direction: column; }
   .search-box { grid-template-columns: 1fr; }
+  .storage-grid { grid-template-columns: 1fr; }
 }
 "@
 Set-Content -LiteralPath (Join-Path $docsDir 'styles.css') -Value $css -Encoding UTF8

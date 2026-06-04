@@ -40,6 +40,17 @@ Before freezing each weekly Top 10 list, explicitly scan the following instituti
 
 If one of these institutions releases a directly relevant world model, video generation model, VLA system, physical AI foundation model, embodied simulator, or major technical report during the week, it should be placed in the candidate pool even if it is not yet indexed cleanly by arXiv search.
 
+## Storage-Aware Collection Policy
+
+Do not commit every downloaded PDF by default. Prefer this order:
+
+1. Store the report and source links.
+2. Store official paper/project/model-card links.
+3. Store only selected high-value PDFs in Git.
+4. Put bulk or temporary PDF downloads in local-only cache folders.
+
+This keeps the repository useful as a long-running weekly archive without becoming too large to clone.
+
 ## Selected IDs
 
 ```text

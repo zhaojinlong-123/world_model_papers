@@ -41,6 +41,17 @@ docs/     Static website generated from reports
 tools/    Build and push scripts
 ```
 
+## Storage Strategy
+
+Weekly summaries can grow quickly if every original PDF is committed. The current policy is:
+
+- Keep Markdown reports and website pages permanently.
+- Keep source links permanently.
+- Store only selected high-value PDFs by default.
+- Use local-only cache folders for bulk downloads.
+
+See `STORAGE_POLICY.md` for the full policy.
+
 ## Static Website
 
 The weekly report website is generated into `docs/`.
