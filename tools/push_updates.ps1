@@ -7,7 +7,7 @@ $ErrorActionPreference = 'Stop'
 
 Set-Location $Root
 
-git add README.md STORAGE_POLICY.md .gitignore reports sources papers docs tools
+git add README.md STORAGE_POLICY.md INTEREST_PROFILE.md .gitignore reports sources papers docs tools
 $changes = git status --short
 
 if (-not $changes) {
