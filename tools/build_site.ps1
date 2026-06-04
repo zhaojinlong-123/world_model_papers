@@ -83,6 +83,42 @@ function Write-Page([string]$Path, [string]$Title, [string]$Body, [string]$Depth
     <main class="page-shell">
 $Body
     </main>
+    <script>
+      const searchInput = document.querySelector("#paperSearch");
+      const clearButton = document.querySelector("#clearSearch");
+      const searchStatus = document.querySelector("#searchStatus");
+      const cards = Array.from(document.querySelectorAll(".hotspot-card, .paper-card, .watch-card"));
+
+      function normalize(text) {
+        return (text || "").toLowerCase().trim();
+      }
+
+      function searchableText(card) {
+        return normalize([card.textContent, card.dataset.search].join(" "));
+      }
+
+      function applySearch() {
+        if (!searchInput || !searchStatus) return;
+        const query = normalize(searchInput.value);
+        const terms = query.split(/\s+/).filter(Boolean);
+        let visibleCount = 0;
+
+        cards.forEach((card) => {
+          const matched = terms.length === 0 || terms.every((term) => searchableText(card).includes(term));
+          card.hidden = !matched;
+          if (matched) visibleCount += 1;
+        });
+
+        searchStatus.textContent = terms.length === 0 ? "显示全部条目" : "找到 " + visibleCount + " 个相关条目";
+      }
+
+      searchInput?.addEventListener("input", applySearch);
+      clearButton?.addEventListener("click", () => {
+        searchInput.value = "";
+        applySearch();
+        searchInput.focus();
+      });
+    </script>
   </body>
 </html>
 "@
@@ -151,7 +187,7 @@ $weeklyBody
 
 $cards = foreach ($paper in $paperSpecs) {
 @"
-          <article class="paper-card">
+          <article class="paper-card" data-search="$($paper.No) $($paper.Title) $($paper.Tag) $($paper.Fresh) world model video generation paper report">
             <span class="paper-no">$($paper.No)</span>
             <div>
               <p class="tag">$($paper.Tag) · $($paper.Fresh)</p>
@@ -167,7 +203,7 @@ $cards = foreach ($paper in $paperSpecs) {
 
 $hotspotCards = foreach ($hot in $hotspots) {
 @"
-          <article class="hotspot-card">
+          <article class="hotspot-card" data-search="$($hot.Name) $($hot.Status) $($hot.Note) hotspot institution world model video generation">
             <p class="tag">$($hot.Status)</p>
             <h3>$($hot.Name)</h3>
             <p>$($hot.Note)</p>
@@ -178,7 +214,7 @@ $hotspotCards = foreach ($hot in $hotspots) {
 
 $watchlistCards = foreach ($item in $watchlist) {
 @"
-          <article class="watch-card">
+          <article class="watch-card" data-search="$($item.Lab) $($item.Focus) institution watchlist world model video generation VLA physical AI">
             <h3>$($item.Lab)</h3>
             <p>$($item.Focus)</p>
           </article>
@@ -194,6 +230,15 @@ $indexBody = @"
           <a class="button primary" href="#latest">查看本周热点</a>
           <a class="button" href="weeks/2026-06-04.html">阅读本周汇总</a>
         </div>
+      </section>
+
+      <section class="search-section" aria-label="论文检索">
+        <label class="search-label" for="paperSearch">检索论文、热点和机构</label>
+        <div class="search-box">
+          <input id="paperSearch" type="search" placeholder="输入关键词，例如 NVIDIA、world model、VLA、video、LongVie、Cosmos..." autocomplete="off" />
+          <button id="clearSearch" type="button">清空</button>
+        </div>
+        <p id="searchStatus" class="search-status">显示全部条目</p>
       </section>
 
       <section id="latest" class="section">
@@ -292,6 +337,58 @@ h3 { margin: 0; font-size: 20px; line-height: 1.3; }
 .lead, .section-heading p, .trend-panel p, .article-body p, .hotspot-card p, .watch-card p { color: var(--muted); }
 .lead { max-width: 780px; font-size: 19px; }
 .hero-actions, .paper-actions, .card-actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 24px; }
+.search-section {
+  max-width: 1040px;
+  margin: 0 0 24px;
+  padding: 20px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--panel);
+}
+.search-label {
+  display: block;
+  margin-bottom: 10px;
+  color: var(--mint);
+  font-size: 12px;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+.search-box {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 10px;
+}
+.search-box input {
+  min-width: 0;
+  height: 46px;
+  padding: 0 14px;
+  border: 1px solid rgba(98, 230, 255, 0.28);
+  border-radius: 6px;
+  background: rgba(7, 16, 24, 0.88);
+  color: var(--ink);
+  font: inherit;
+}
+.search-box input:focus {
+  border-color: var(--mint);
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(110, 255, 192, 0.1);
+}
+.search-box button {
+  min-height: 46px;
+  padding: 0 14px;
+  border: 1px solid rgba(98, 230, 255, 0.34);
+  border-radius: 6px;
+  background: transparent;
+  color: var(--ink);
+  font-weight: 900;
+  cursor: pointer;
+}
+.search-status {
+  margin: 10px 0 0;
+  color: var(--muted);
+  font-size: 14px;
+}
+[hidden] { display: none !important; }
 .button {
   display: inline-flex;
   align-items: center;
@@ -350,6 +447,7 @@ h3 { margin: 0; font-size: 20px; line-height: 1.3; }
 @media (max-width: 900px) {
   .hotspot-grid, .paper-grid, .watch-grid { grid-template-columns: 1fr; }
   .site-header { align-items: flex-start; flex-direction: column; }
+  .search-box { grid-template-columns: 1fr; }
 }
 "@
 Set-Content -LiteralPath (Join-Path $docsDir 'styles.css') -Value $css -Encoding UTF8

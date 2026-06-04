@@ -27,6 +27,15 @@
         </div>
       </section>
 
+      <section class="search-section" aria-label="论文检索">
+        <label class="search-label" for="paperSearch">检索论文、热点和机构</label>
+        <div class="search-box">
+          <input id="paperSearch" type="search" placeholder="输入关键词，例如 NVIDIA、world model、VLA、video、LongVie、Cosmos..." autocomplete="off" />
+          <button id="clearSearch" type="button">清空</button>
+        </div>
+        <p id="searchStatus" class="search-status">显示全部条目</p>
+      </section>
+
       <section id="latest" class="section">
         <div class="section-heading">
           <p class="eyebrow">Latest Hotspots</p>
@@ -34,19 +43,19 @@
           <p>这一栏专门放“本周必须注意”的模型、论文和项目，避免只按 arXiv PDF 批处理导致 Cosmos 3、SANA-WM 这类项目被漏掉。</p>
         </div>
         <div class="hotspot-grid">
-          <article class="hotspot-card">
+          <article class="hotspot-card" data-search="Cosmos 3 本周强制热点 2026-06-01 发布，物理 AI 世界基础模型，应该进入修订版 Top 10。 hotspot institution world model video generation">
             <p class="tag">本周强制热点</p>
             <h3>Cosmos 3</h3>
             <p>2026-06-01 发布，物理 AI 世界基础模型，应该进入修订版 Top 10。</p>
             <a href="https://research.nvidia.com/labs/cosmos-lab/cosmos3" target="_blank" rel="noreferrer">查看来源</a>
           </article>
-          <article class="hotspot-card">
+          <article class="hotspot-card" data-search="SANA-WM 近期核心热点 2.6B 开源世界模型，720p / 1 分钟可控视频生成，应进入扩展口径 Top 10。 hotspot institution world model video generation">
             <p class="tag">近期核心热点</p>
             <h3>SANA-WM</h3>
             <p>2.6B 开源世界模型，720p / 1 分钟可控视频生成，应进入扩展口径 Top 10。</p>
             <a href="https://arxiv.org/abs/2605.15178" target="_blank" rel="noreferrer">查看来源</a>
           </article>
-          <article class="hotspot-card">
+          <article class="hotspot-card" data-search="Gemma 4 附录观察 更偏语言/多模态推理底座，不应挤占世界模型/视频生成主榜，可放相关基础模型区。 hotspot institution world model video generation">
             <p class="tag">附录观察</p>
             <h3>Gemma 4</h3>
             <p>更偏语言/多模态推理底座，不应挤占世界模型/视频生成主榜，可放相关基础模型区。</p>
@@ -62,7 +71,7 @@
           <p>每篇论文都有独立网页和原始 PDF 链接，便于快速进入方法、实验、局限和产品启示。</p>
         </div>
         <div class="paper-grid">
-          <article class="paper-card">
+          <article class="paper-card" data-search="01 PhyWorld Physics World Model Near-week world model video generation paper report">
             <span class="paper-no">01</span>
             <div>
               <p class="tag">Physics World Model · Near-week</p>
@@ -73,7 +82,7 @@
               </div>
             </div>
           </article>
-          <article class="paper-card">
+          <article class="paper-card" data-search="02 Nano World Models Reproducible WM Near-week world model video generation paper report">
             <span class="paper-no">02</span>
             <div>
               <p class="tag">Reproducible WM · Near-week</p>
@@ -84,7 +93,7 @@
               </div>
             </div>
           </article>
-          <article class="paper-card">
+          <article class="paper-card" data-search="03 Residual Latent Action WM Robot Learning Recent world model video generation paper report">
             <span class="paper-no">03</span>
             <div>
               <p class="tag">Robot Learning · Recent</p>
@@ -95,7 +104,7 @@
               </div>
             </div>
           </article>
-          <article class="paper-card">
+          <article class="paper-card" data-search="04 DriveDreamer-Policy World-Action Model Recent world model video generation paper report">
             <span class="paper-no">04</span>
             <div>
               <p class="tag">World-Action Model · Recent</p>
@@ -106,7 +115,7 @@
               </div>
             </div>
           </article>
-          <article class="paper-card">
+          <article class="paper-card" data-search="05 Latent Particle World Models Object-centric Recent core world model video generation paper report">
             <span class="paper-no">05</span>
             <div>
               <p class="tag">Object-centric · Recent core</p>
@@ -117,7 +126,7 @@
               </div>
             </div>
           </article>
-          <article class="paper-card">
+          <article class="paper-card" data-search="06 ThinkJEPA VLM + JEPA Recent core world model video generation paper report">
             <span class="paper-no">06</span>
             <div>
               <p class="tag">VLM + JEPA · Recent core</p>
@@ -128,7 +137,7 @@
               </div>
             </div>
           </article>
-          <article class="paper-card">
+          <article class="paper-card" data-search="07 WorldCache Content-Aware Acceleration Recent core world model video generation paper report">
             <span class="paper-no">07</span>
             <div>
               <p class="tag">Acceleration · Recent core</p>
@@ -139,7 +148,7 @@
               </div>
             </div>
           </article>
-          <article class="paper-card">
+          <article class="paper-card" data-search="08 WorldCache Token Caching Acceleration Recent core world model video generation paper report">
             <span class="paper-no">08</span>
             <div>
               <p class="tag">Acceleration · Recent core</p>
@@ -150,7 +159,7 @@
               </div>
             </div>
           </article>
-          <article class="paper-card">
+          <article class="paper-card" data-search="09 TeleWorld 4D World Model Background world model video generation paper report">
             <span class="paper-no">09</span>
             <div>
               <p class="tag">4D World Model · Background</p>
@@ -161,7 +170,7 @@
               </div>
             </div>
           </article>
-          <article class="paper-card">
+          <article class="paper-card" data-search="10 LongVie 2 Ultra-long Video Background world model video generation paper report">
             <span class="paper-no">10</span>
             <div>
               <p class="tag">Ultra-long Video · Background</p>
@@ -182,27 +191,27 @@
           <p>每周总结会优先扫描这些大型机构的论文、模型卡、技术报告、GitHub 和 Hugging Face 发布。大型机构的 world model / video generation / VLA / physical AI 相关发布会被强制召回到候选池。</p>
         </div>
         <div class="watch-grid">
-          <article class="watch-card">
+          <article class="watch-card" data-search="NVIDIA Cosmos / SANA / Physical AI / video world models institution watchlist world model video generation VLA physical AI">
             <h3>NVIDIA</h3>
             <p>Cosmos / SANA / Physical AI / video world models</p>
           </article>
-          <article class="watch-card">
+          <article class="watch-card" data-search="Google / DeepMind Gemini Robotics / world models / embodied reasoning institution watchlist world model video generation VLA physical AI">
             <h3>Google / DeepMind</h3>
             <p>Gemini Robotics / world models / embodied reasoning</p>
           </article>
-          <article class="watch-card">
+          <article class="watch-card" data-search="Genesis generative physical simulation / robot simulation ecosystem institution watchlist world model video generation VLA physical AI">
             <h3>Genesis</h3>
             <p>generative physical simulation / robot simulation ecosystem</p>
           </article>
-          <article class="watch-card">
+          <article class="watch-card" data-search="Qwen / Alibaba multimodal models / video / agent and robotics foundations institution watchlist world model video generation VLA physical AI">
             <h3>Qwen / Alibaba</h3>
             <p>multimodal models / video / agent and robotics foundations</p>
           </article>
-          <article class="watch-card">
+          <article class="watch-card" data-search="DeepSeek reasoning models / multimodal foundations / agentic systems institution watchlist world model video generation VLA physical AI">
             <h3>DeepSeek</h3>
             <p>reasoning models / multimodal foundations / agentic systems</p>
           </article>
-          <article class="watch-card">
+          <article class="watch-card" data-search="Seed / ByteDance video generation / world models / embodied AI releases institution watchlist world model video generation VLA physical AI">
             <h3>Seed / ByteDance</h3>
             <p>video generation / world models / embodied AI releases</p>
           </article>
@@ -216,5 +225,41 @@
         <a class="button primary" href="weeks/2026-06-04.html">打开完整汇总报告</a>
       </section>
     </main>
+    <script>
+      const searchInput = document.querySelector("#paperSearch");
+      const clearButton = document.querySelector("#clearSearch");
+      const searchStatus = document.querySelector("#searchStatus");
+      const cards = Array.from(document.querySelectorAll(".hotspot-card, .paper-card, .watch-card"));
+
+      function normalize(text) {
+        return (text || "").toLowerCase().trim();
+      }
+
+      function searchableText(card) {
+        return normalize([card.textContent, card.dataset.search].join(" "));
+      }
+
+      function applySearch() {
+        if (!searchInput || !searchStatus) return;
+        const query = normalize(searchInput.value);
+        const terms = query.split(/\s+/).filter(Boolean);
+        let visibleCount = 0;
+
+        cards.forEach((card) => {
+          const matched = terms.length === 0 || terms.every((term) => searchableText(card).includes(term));
+          card.hidden = !matched;
+          if (matched) visibleCount += 1;
+        });
+
+        searchStatus.textContent = terms.length === 0 ? "显示全部条目" : "找到 " + visibleCount + " 个相关条目";
+      }
+
+      searchInput?.addEventListener("input", applySearch);
+      clearButton?.addEventListener("click", () => {
+        searchInput.value = "";
+        applySearch();
+        searchInput.focus();
+      });
+    </script>
   </body>
 </html>
