@@ -51,6 +51,20 @@ Do not commit every downloaded PDF by default. Prefer this order:
 
 This keeps the repository useful as a long-running weekly archive without becoming too large to clone.
 
+## Interest-Aware Retrieval Policy
+
+Use `sources/interest_profile.json` when ranking candidates. Candidate scoring should include:
+
+```text
+final_score = topical_relevance
+            + recency
+            + source_heat
+            + institution_boost
+            + interest_weight
+```
+
+High-interest directions should be searched first and searched deeper. Low-interest but useful papers can remain in appendices.
+
 ## Selected IDs
 
 ```text

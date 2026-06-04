@@ -31,6 +31,19 @@ Future weekly summaries should explicitly monitor major labs and model providers
 
 These institutions should receive a strong recall boost when they publish world models, video generation models, VLA systems, embodied AI models, simulation platforms, or physical AI technical reports. Large-lab releases can enter the weekly hotspot list even when they are first published as a model card, blog post, GitHub repo, or technical report rather than a conventional arXiv paper.
 
+## Interest-Weighted Retrieval
+
+Weekly retrieval should use the interest profile in `INTEREST_PROFILE.md` and `sources/interest_profile.json`.
+
+The highest-priority directions are:
+
+- Physical AI world foundation models.
+- Video world models and long-horizon controllable video generation.
+- VLA / world-action models for robotics.
+- Large institution releases from NVIDIA, Google/DeepMind, Genesis, Qwen, DeepSeek, and Seed/ByteDance.
+
+High-interest directions should receive stronger keyword coverage, more source checks, and a higher chance of entering the weekly Top 10.
+
 ## Directory
 
 ```text

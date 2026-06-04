@@ -77,6 +77,7 @@ function Write-Page([string]$Path, [string]$Title, [string]$Body, [string]$Depth
         <a href="$Depth/index.html#latest">本周热点</a>
         <a href="$Depth/index.html#papers">论文报告</a>
         <a href="$Depth/index.html#watchlist">重点机构</a>
+        <a href="$Depth/index.html#interest">兴趣方向</a>
         <a href="$Depth/index.html#trend">趋势总结</a>
       </nav>
     </header>
@@ -126,16 +127,24 @@ $Body
 }
 
 $paperSpecs = @(
-  @{ No='01'; Slug='01_PhyWorld'; Md='01_PhyWorld.md'; Pdf='01_PhyWorld_2605.19242.pdf'; Title='PhyWorld'; Tag='Physics World Model'; Fresh='Near-week' },
-  @{ No='02'; Slug='02_Nano_World_Models'; Md='02_Nano_World_Models.md'; Pdf='02_Nano_World_Models_2605.23993.pdf'; Title='Nano World Models'; Tag='Reproducible WM'; Fresh='Near-week' },
-  @{ No='03'; Slug='03_RLA_World_Model'; Md='03_RLA_World_Model.md'; Pdf='03_Visual_Feature_RLA_2605.07079.pdf'; Title='Residual Latent Action WM'; Tag='Robot Learning'; Fresh='Recent' },
-  @{ No='04'; Slug='04_DriveDreamer_Policy'; Md='04_DriveDreamer_Policy.md'; Pdf='04_DriveDreamer_Policy_2604.01765.pdf'; Title='DriveDreamer-Policy'; Tag='World-Action Model'; Fresh='Recent' },
-  @{ No='05'; Slug='05_Latent_Particle_World_Models'; Md='05_Latent_Particle_World_Models.md'; Pdf='05_Latent_Particle_World_Models_2603.04553.pdf'; Title='Latent Particle World Models'; Tag='Object-centric'; Fresh='Recent core' },
-  @{ No='06'; Slug='06_ThinkJEPA'; Md='06_ThinkJEPA.md'; Pdf='06_ThinkJEPA_2603.22281.pdf'; Title='ThinkJEPA'; Tag='VLM + JEPA'; Fresh='Recent core' },
-  @{ No='07'; Slug='07_WorldCache_Content_Aware'; Md='07_WorldCache_Content_Aware.md'; Pdf='07_WorldCache_Content_Aware_2603.22286.pdf'; Title='WorldCache Content-Aware'; Tag='Acceleration'; Fresh='Recent core' },
-  @{ No='08'; Slug='08_WorldCache_Heterogeneous_Token'; Md='08_WorldCache_Heterogeneous_Token.md'; Pdf='08_WorldCache_Heterogeneous_Token_2603.06331.pdf'; Title='WorldCache Token Caching'; Tag='Acceleration'; Fresh='Recent core' },
-  @{ No='09'; Slug='09_TeleWorld'; Md='09_TeleWorld.md'; Pdf='09_TeleWorld_2601.00051.pdf'; Title='TeleWorld'; Tag='4D World Model'; Fresh='Background' },
-  @{ No='10'; Slug='10_LongVie2'; Md='10_LongVie2.md'; Pdf='10_LongVie2_2512.13604.pdf'; Title='LongVie 2'; Tag='Ultra-long Video'; Fresh='Background' }
+  @{ No='01'; Slug='01_PhyWorld'; Md='01_PhyWorld.md'; Pdf='01_PhyWorld_2605.19242.pdf'; Title='PhyWorld'; Tag='Physics World Model'; Fresh='Near-week'; Interest=5; InterestReason='物理一致性和 Physical AI 仿真高度相关' },
+  @{ No='02'; Slug='02_Nano_World_Models'; Md='02_Nano_World_Models.md'; Pdf='02_Nano_World_Models_2605.23993.pdf'; Title='Nano World Models'; Tag='Reproducible WM'; Fresh='Near-week'; Interest=4; InterestReason='适合内部复现实验和方法消融' },
+  @{ No='03'; Slug='03_RLA_World_Model'; Md='03_RLA_World_Model.md'; Pdf='03_Visual_Feature_RLA_2605.07079.pdf'; Title='Residual Latent Action WM'; Tag='Robot Learning'; Fresh='Recent'; Interest=5; InterestReason='机器人策略学习和动作有用表征强相关' },
+  @{ No='04'; Slug='04_DriveDreamer_Policy'; Md='04_DriveDreamer_Policy.md'; Pdf='04_DriveDreamer_Policy_2604.01765.pdf'; Title='DriveDreamer-Policy'; Tag='World-Action Model'; Fresh='Recent'; Interest=5; InterestReason='世界模型和动作规划/VLA 融合' },
+  @{ No='05'; Slug='05_Latent_Particle_World_Models'; Md='05_Latent_Particle_World_Models.md'; Pdf='05_Latent_Particle_World_Models_2603.04553.pdf'; Title='Latent Particle World Models'; Tag='Object-centric'; Fresh='Recent core'; Interest=4; InterestReason='结构化对象动态和决策学习有价值' },
+  @{ No='06'; Slug='06_ThinkJEPA'; Md='06_ThinkJEPA.md'; Pdf='06_ThinkJEPA_2603.22281.pdf'; Title='ThinkJEPA'; Tag='VLM + JEPA'; Fresh='Recent core'; Interest=4; InterestReason='VLM 语义推理指导 latent world model' },
+  @{ No='07'; Slug='07_WorldCache_Content_Aware'; Md='07_WorldCache_Content_Aware.md'; Pdf='07_WorldCache_Content_Aware_2603.22286.pdf'; Title='WorldCache Content-Aware'; Tag='Acceleration'; Fresh='Recent core'; Interest=4; InterestReason='世界模型部署和低延迟推理关键' },
+  @{ No='08'; Slug='08_WorldCache_Heterogeneous_Token'; Md='08_WorldCache_Heterogeneous_Token.md'; Pdf='08_WorldCache_Heterogeneous_Token_2603.06331.pdf'; Title='WorldCache Token Caching'; Tag='Acceleration'; Fresh='Recent core'; Interest=4; InterestReason='token 级缓存可降低交互式世界模型成本' },
+  @{ No='09'; Slug='09_TeleWorld'; Md='09_TeleWorld.md'; Pdf='09_TeleWorld_2601.00051.pdf'; Title='TeleWorld'; Tag='4D World Model'; Fresh='Background'; Interest=5; InterestReason='4D 世界记忆和动态多模态合成非常关键' },
+  @{ No='10'; Slug='10_LongVie2'; Md='10_LongVie2.md'; Pdf='10_LongVie2_2512.13604.pdf'; Title='LongVie 2'; Tag='Ultra-long Video'; Fresh='Background'; Interest=5; InterestReason='长时序可控视频世界模型方向高度相关' }
+)
+
+$interestDirections = @(
+  @{ Direction='Physical AI world foundation models'; Score=5; Note='优先检索 Cosmos、Genesis、物理推理、具身仿真。' },
+  @{ Direction='Video world models and long-horizon generation'; Score=5; Note='重点关注可控长视频、交互式视频世界模型。' },
+  @{ Direction='VLA / world-action models for robotics'; Score=5; Note='重点关注动作条件、机器人策略和规划。' },
+  @{ Direction='Object-centric / latent dynamics'; Score=4; Note='关注对象级状态、JEPA、latent particle 和 feature dynamics。' },
+  @{ Direction='Inference acceleration'; Score=4; Note='关注缓存、token skipping、蒸馏和低延迟部署。' }
 )
 
 $hotspots = @(
@@ -187,16 +196,31 @@ $weeklyBody
 
 $cards = foreach ($paper in $paperSpecs) {
 @"
-          <article class="paper-card" data-search="$($paper.No) $($paper.Title) $($paper.Tag) $($paper.Fresh) world model video generation paper report">
+          <article class="paper-card" data-search="$($paper.No) $($paper.Title) $($paper.Tag) $($paper.Fresh) interest $($paper.Interest) $($paper.InterestReason) world model video generation paper report">
             <span class="paper-no">$($paper.No)</span>
             <div>
               <p class="tag">$($paper.Tag) · $($paper.Fresh)</p>
               <h3>$($paper.Title)</h3>
+              <div class="interest-meter" aria-label="兴趣分 $($paper.Interest) 分">
+                <span>兴趣 $($paper.Interest)/5</span>
+                <i style="--score: $($paper.Interest)"></i>
+              </div>
+              <p class="interest-reason">$($paper.InterestReason)</p>
               <div class="card-actions">
                 <a href="papers/$($paper.Slug).html">分析报告</a>
                 <a href="../papers/$($paper.Pdf)" target="_blank" rel="noreferrer">PDF</a>
               </div>
             </div>
+          </article>
+"@
+}
+
+$interestCards = foreach ($item in $interestDirections) {
+@"
+          <article class="interest-card" data-search="$($item.Direction) score $($item.Score) $($item.Note) interest direction retrieval priority">
+            <p class="tag">Interest $($item.Score)/5</p>
+            <h3>$($item.Direction)</h3>
+            <p>$($item.Note)</p>
           </article>
 "@
 }
@@ -271,6 +295,17 @@ $($cards -join "`n")
         </div>
         <div class="watch-grid">
 $($watchlistCards -join "`n")
+        </div>
+      </section>
+
+      <section id="interest" class="section">
+        <div class="section-heading">
+          <p class="eyebrow">Interest Profile</p>
+          <h2>兴趣方向与下周检索权重</h2>
+          <p>每篇论文和每个方向都会打兴趣分。下周检索时，高兴趣方向会获得更高关键词覆盖、更深来源扫描和更高入选权重。</p>
+        </div>
+        <div class="interest-grid">
+$($interestCards -join "`n")
         </div>
       </section>
 
@@ -354,7 +389,7 @@ nav a:hover { color: var(--mint); }
 h1 { margin: 0; max-width: 980px; font-size: clamp(40px, 7vw, 76px); line-height: 1.04; }
 h2 { margin: 0; font-size: clamp(28px, 4vw, 44px); line-height: 1.14; }
 h3 { margin: 0; font-size: 20px; line-height: 1.3; }
-.lead, .section-heading p, .trend-panel p, .storage-panel p, .article-body p, .hotspot-card p, .watch-card p { color: var(--muted); }
+.lead, .section-heading p, .trend-panel p, .storage-panel p, .article-body p, .hotspot-card p, .watch-card p, .interest-card p, .interest-reason { color: var(--muted); }
 .lead { max-width: 780px; font-size: 19px; }
 .hero-actions, .paper-actions, .card-actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 24px; }
 .search-section {
@@ -422,19 +457,19 @@ h3 { margin: 0; font-size: 20px; line-height: 1.3; }
 .button.primary { background: linear-gradient(135deg, var(--cyan), var(--mint)); color: #061018; }
 .section { padding: clamp(42px, 7vw, 86px) 0; }
 .section-heading { max-width: 860px; margin-bottom: 24px; }
-.hotspot-grid, .paper-grid, .watch-grid {
+.hotspot-grid, .paper-grid, .watch-grid, .interest-grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 16px;
 }
 .paper-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-.hotspot-card, .paper-card, .watch-card, .storage-panel, .trend-panel, .article-body {
+.hotspot-card, .paper-card, .watch-card, .interest-card, .storage-panel, .trend-panel, .article-body {
   border: 1px solid var(--line);
   border-radius: 8px;
   background: var(--panel);
   box-shadow: 0 18px 54px rgba(0,0,0,0.2);
 }
-.hotspot-card, .watch-card, .storage-panel, .trend-panel, .article-body { padding: 24px; }
+.hotspot-card, .watch-card, .interest-card, .storage-panel, .trend-panel, .article-body { padding: 24px; }
 .storage-grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -472,6 +507,37 @@ h3 { margin: 0; font-size: 20px; line-height: 1.3; }
   color: var(--mint);
   font-weight: 900;
 }
+.interest-meter {
+  display: grid;
+  gap: 7px;
+  margin-top: 12px;
+}
+.interest-meter span {
+  color: var(--mint);
+  font-size: 12px;
+  font-weight: 900;
+}
+.interest-meter i {
+  display: block;
+  width: 100%;
+  height: 7px;
+  overflow: hidden;
+  border: 1px solid rgba(98, 230, 255, 0.2);
+  border-radius: 999px;
+  background: rgba(7, 16, 24, 0.72);
+}
+.interest-meter i::before {
+  display: block;
+  width: calc((var(--score) / 5) * 100%);
+  height: 100%;
+  border-radius: 999px;
+  background: linear-gradient(90deg, var(--cyan), var(--mint));
+  content: "";
+}
+.interest-reason {
+  margin: 10px 0 0;
+  font-size: 14px;
+}
 .card-actions a, .hotspot-card a, .back-link {
   color: var(--cyan);
   font-weight: 900;
@@ -486,7 +552,7 @@ h3 { margin: 0; font-size: 20px; line-height: 1.3; }
 .article-body li { margin: 8px 0; color: var(--muted); }
 
 @media (max-width: 900px) {
-  .hotspot-grid, .paper-grid, .watch-grid { grid-template-columns: 1fr; }
+  .hotspot-grid, .paper-grid, .watch-grid, .interest-grid { grid-template-columns: 1fr; }
   .site-header { align-items: flex-start; flex-direction: column; }
   .search-box { grid-template-columns: 1fr; }
   .storage-grid { grid-template-columns: 1fr; }

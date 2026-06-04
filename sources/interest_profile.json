@@ -1,0 +1,48 @@
+{
+  "scale": "1-5",
+  "updated": "2026-06-05",
+  "direction_weights": [
+    {
+      "direction": "Physical AI world foundation models",
+      "score": 5,
+      "keywords": ["physical ai", "world foundation model", "cosmos", "embodied simulation", "physics reasoning"]
+    },
+    {
+      "direction": "Video world models and long-horizon video generation",
+      "score": 5,
+      "keywords": ["video world model", "long video", "controllable video", "interactive video generation"]
+    },
+    {
+      "direction": "VLA / world-action models for robotics",
+      "score": 5,
+      "keywords": ["VLA", "world-action", "robot policy", "action-conditioned", "planning"]
+    },
+    {
+      "direction": "Object-centric / latent dynamics world models",
+      "score": 4,
+      "keywords": ["object-centric", "latent dynamics", "JEPA", "particle world model", "feature prediction"]
+    },
+    {
+      "direction": "Inference acceleration for world models",
+      "score": 4,
+      "keywords": ["caching", "token skipping", "distillation", "low latency", "acceleration"]
+    },
+    {
+      "direction": "Large institution releases",
+      "score": 5,
+      "keywords": ["NVIDIA", "Google", "DeepMind", "Genesis", "Qwen", "DeepSeek", "Seed", "ByteDance"]
+    }
+  ],
+  "paper_scores": [
+    { "paper": "PhyWorld", "score": 5 },
+    { "paper": "Nano World Models", "score": 4 },
+    { "paper": "Residual Latent Action WM", "score": 5 },
+    { "paper": "DriveDreamer-Policy", "score": 5 },
+    { "paper": "Latent Particle World Models", "score": 4 },
+    { "paper": "ThinkJEPA", "score": 4 },
+    { "paper": "WorldCache Content-Aware", "score": 4 },
+    { "paper": "WorldCache Token Caching", "score": 4 },
+    { "paper": "TeleWorld", "score": 5 },
+    { "paper": "LongVie 2", "score": 5 }
+  ]
+}
