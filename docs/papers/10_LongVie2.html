@@ -10,20 +10,21 @@
     <header class="site-header">
       <a class="brand" href="../index.html">World Model Weekly</a>
       <nav>
+        <a href="../index.html#weekly">本周汇总</a>
         <a href="../index.html#latest">本周热点</a>
         <a href="../index.html#papers">论文报告</a>
         <a href="../index.html#watchlist">重点机构</a>
         <a href="../index.html#interest">兴趣方向</a>
-        <a href="../index.html#trend">趋势总结</a>
       </nav>
     </header>
     <main class="page-shell">
       <section class="paper-hero">
-        <a class="back-link" href="../index.html#papers">← 返回本周论文列表</a>
+        <a class="back-link" href="../index.html#papers">返回本周论文列表</a>
         <p class="eyebrow">Ultra-long Video</p>
         <h1>LongVie 2</h1>
+        <p class="paper-summary">聚焦超长视频生成和跨片段一致性，对长时序模拟、交互记忆和陪伴机器人场景很有价值。</p>
         <div class="paper-actions">
-          <a class="button" href="../../papers/10_LongVie2_2512.13604.pdf" target="_blank" rel="noreferrer">打开原论文 PDF</a>
+          <a class="button primary" href="../pdfs/10_LongVie2_2512.13604.pdf" target="_blank" rel="noreferrer">打开原论文 PDF</a>
         </div>
       </section>
       <article class="article-body">
@@ -85,7 +86,11 @@
       const searchInput = document.querySelector("#paperSearch");
       const clearButton = document.querySelector("#clearSearch");
       const searchStatus = document.querySelector("#searchStatus");
-      const cards = Array.from(document.querySelectorAll(".hotspot-card, .paper-card, .watch-card"));
+      const cards = Array.from(document.querySelectorAll(".hotspot-card, .paper-card, .watch-card, .interest-card"));
+      const scoreButtons = Array.from(document.querySelectorAll(".score-button"));
+      const exportButton = document.querySelector("#exportInterest");
+      const exportBox = document.querySelector("#interestExport");
+      const storageKey = "world-model-weekly-interest";
 
       function normalize(text) {
         return (text || "").toLowerCase().trim();
@@ -97,8 +102,7 @@
 
       function applySearch() {
         if (!searchInput || !searchStatus) return;
-        const query = normalize(searchInput.value);
-        const terms = query.split(/\s+/).filter(Boolean);
+        const terms = normalize(searchInput.value).split(/\s+/).filter(Boolean);
         let visibleCount = 0;
 
         cards.forEach((card) => {
@@ -110,12 +114,61 @@
         searchStatus.textContent = terms.length === 0 ? "显示全部条目" : "找到 " + visibleCount + " 个相关条目";
       }
 
+      function readScores() {
+        try {
+          return JSON.parse(localStorage.getItem(storageKey) || "{}");
+        } catch {
+          return {};
+        }
+      }
+
+      function writeScores(scores) {
+        localStorage.setItem(storageKey, JSON.stringify(scores));
+      }
+
+      function applyScores() {
+        const scores = readScores();
+        scoreButtons.forEach((button) => {
+          const selected = String(scores[button.dataset.paper] || button.dataset.defaultScore) === button.dataset.score;
+          button.classList.toggle("is-active", selected);
+          button.setAttribute("aria-pressed", selected ? "true" : "false");
+        });
+        document.querySelectorAll("[data-interest-text]").forEach((node) => {
+          const paper = node.dataset.interestText;
+          const defaultScore = node.dataset.defaultScore;
+          const score = scores[paper] || defaultScore;
+          node.textContent = "兴趣 " + score + "/5";
+        });
+        document.querySelectorAll("[data-interest-bar]").forEach((node) => {
+          const paper = node.dataset.interestBar;
+          const defaultScore = node.dataset.defaultScore;
+          node.style.setProperty("--score", scores[paper] || defaultScore);
+        });
+      }
+
+      scoreButtons.forEach((button) => {
+        button.addEventListener("click", () => {
+          const scores = readScores();
+          scores[button.dataset.paper] = Number(button.dataset.score);
+          scores.updated = new Date().toISOString();
+          writeScores(scores);
+          applyScores();
+        });
+      });
+
+      exportButton?.addEventListener("click", () => {
+        const scores = readScores();
+        exportBox.hidden = false;
+        exportBox.textContent = JSON.stringify(scores, null, 2);
+      });
+
       searchInput?.addEventListener("input", applySearch);
       clearButton?.addEventListener("click", () => {
         searchInput.value = "";
         applySearch();
         searchInput.focus();
       });
+      applyScores();
     </script>
   </body>
 </html>
