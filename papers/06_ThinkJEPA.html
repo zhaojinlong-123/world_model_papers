@@ -1,0 +1,112 @@
+﻿<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>ThinkJEPA | Paper Report</title>
+    <link rel="stylesheet" href="../styles.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="brand" href="../index.html">World Model Weekly</a>
+      <nav>
+        <a href="../index.html#latest">本周热点</a>
+        <a href="../index.html#papers">论文报告</a>
+        <a href="../index.html#watchlist">重点机构</a>
+        <a href="../index.html#interest">兴趣方向</a>
+        <a href="../index.html#trend">趋势总结</a>
+      </nav>
+    </header>
+    <main class="page-shell">
+      <section class="paper-hero">
+        <a class="back-link" href="../index.html#papers">← 返回本周论文列表</a>
+        <p class="eyebrow">VLM + JEPA</p>
+        <h1>ThinkJEPA</h1>
+        <div class="paper-actions">
+          <a class="button" href="../../papers/06_ThinkJEPA_2603.22281.pdf" target="_blank" rel="noreferrer">打开原论文 PDF</a>
+        </div>
+      </section>
+      <article class="article-body">
+<h1>06. ThinkJEPA: Empowering Latent World Models with Large Vision-Language Reasoning Model</h1>
+<h2>Metadata</h2>
+<ul>
+<li>arXiv: https://arxiv.org/abs/2603.22281</li>
+<li>PDF: `../papers/06_ThinkJEPA_2603.22281.pdf`</li>
+<li>Topic: latent world model, JEPA, VLM guidance, long-horizon reasoning</li>
+</ul>
+<h2>Core Problem</h2>
+<p>Latent world models such as JEPA-style predictors can forecast future states from dense video observations, but they may focus too much on short-horizon low-level motion. VLMs have semantic reasoning but are sparse and text-bottlenecked. The problem is how to combine dense predictive dynamics with long-horizon semantic guidance.</p>
+<h2>Main Idea</h2>
+<p>ThinkJEPA introduces a dual-temporal pathway:</p>
+<ul>
+<li>A dense JEPA branch captures fine-grained motion and interaction.</li>
+<li>A VLM &quot;thinker&quot; branch samples frames at a larger stride and provides semantic guidance.</li>
+</ul>
+<p>It also uses hierarchical pyramid representation extraction to transfer VLM reasoning signals into latent prediction.</p>
+<h2>Technical Reading</h2>
+<p>The paper is interesting because it treats VLMs not as final predictors but as teachers/guides for world-model dynamics. This avoids forcing all future state into language, while still giving the model access to semantic and commonsense context.</p>
+<p>This design is relevant to long-horizon tasks where local motion is insufficient. For example, predicting hand manipulation requires knowing both immediate contact dynamics and the broader goal.</p>
+<h2>Experiments And Evidence</h2>
+<p>The paper reports improved hand-manipulation trajectory prediction compared with VLM-only and JEPA-only baselines. It also reports more robust long-horizon rollout behavior.</p>
+<h2>Strengths</h2>
+<ul>
+<li>Combines dense prediction with semantic reasoning.</li>
+<li>Avoids using VLM text output as the only representation.</li>
+<li>Useful for long-horizon embodied prediction.</li>
+<li>Fits the broader trend of using foundation models as guidance modules.</li>
+</ul>
+<h2>Limitations</h2>
+<ul>
+<li>The architecture is more complex than pure JEPA.</li>
+<li>VLM guidance quality depends on the VLM&#39;s domain coverage.</li>
+<li>It may be computationally heavier than compact latent-only models.</li>
+</ul>
+<h2>Relevance To World Models</h2>
+<p>ThinkJEPA is a bridge between representation learning and reasoning. It suggests that future world models may not be single networks but layered systems with fast dynamics and slow semantic thinking.</p>
+<h2>Product Implication</h2>
+<p>For emotional companion robots, a similar architecture could combine:</p>
+<ul>
+<li>Dense sensor prediction for immediate interaction.</li>
+<li>VLM/VLM-like reasoning for scene interpretation.</li>
+<li>Long-term memory for user-specific context.</li>
+</ul>
+      </article>
+    </main>
+    <script>
+      const searchInput = document.querySelector("#paperSearch");
+      const clearButton = document.querySelector("#clearSearch");
+      const searchStatus = document.querySelector("#searchStatus");
+      const cards = Array.from(document.querySelectorAll(".hotspot-card, .paper-card, .watch-card"));
+
+      function normalize(text) {
+        return (text || "").toLowerCase().trim();
+      }
+
+      function searchableText(card) {
+        return normalize([card.textContent, card.dataset.search].join(" "));
+      }
+
+      function applySearch() {
+        if (!searchInput || !searchStatus) return;
+        const query = normalize(searchInput.value);
+        const terms = query.split(/\s+/).filter(Boolean);
+        let visibleCount = 0;
+
+        cards.forEach((card) => {
+          const matched = terms.length === 0 || terms.every((term) => searchableText(card).includes(term));
+          card.hidden = !matched;
+          if (matched) visibleCount += 1;
+        });
+
+        searchStatus.textContent = terms.length === 0 ? "显示全部条目" : "找到 " + visibleCount + " 个相关条目";
+      }
+
+      searchInput?.addEventListener("input", applySearch);
+      clearButton?.addEventListener("click", () => {
+        searchInput.value = "";
+        applySearch();
+        searchInput.focus();
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,124 @@
+﻿<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Nano World Models | Paper Report</title>
+    <link rel="stylesheet" href="../styles.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="brand" href="../index.html">World Model Weekly</a>
+      <nav>
+        <a href="../index.html#latest">本周热点</a>
+        <a href="../index.html#papers">论文报告</a>
+        <a href="../index.html#watchlist">重点机构</a>
+        <a href="../index.html#interest">兴趣方向</a>
+        <a href="../index.html#trend">趋势总结</a>
+      </nav>
+    </header>
+    <main class="page-shell">
+      <section class="paper-hero">
+        <a class="back-link" href="../index.html#papers">← 返回本周论文列表</a>
+        <p class="eyebrow">Reproducible WM</p>
+        <h1>Nano World Models</h1>
+        <div class="paper-actions">
+          <a class="button" href="../../papers/02_Nano_World_Models_2605.23993.pdf" target="_blank" rel="noreferrer">打开原论文 PDF</a>
+        </div>
+      </section>
+      <article class="article-body">
+<h1>02. Nano World Models: A Minimalist Implementation of Future Video Prediction</h1>
+<h2>Metadata</h2>
+<ul>
+<li>arXiv: https://arxiv.org/abs/2605.23993</li>
+<li>PDF: `../papers/02_Nano_World_Models_2605.23993.pdf`</li>
+<li>Project direction: compact, reproducible world-model implementation</li>
+<li>Topic: future video prediction, diffusion forcing, action conditioning, reproducible research</li>
+</ul>
+<h2>Core Problem</h2>
+<p>World models are becoming large, expensive, and difficult to reproduce. Industry systems may show impressive interactive video generation, but academic and startup teams need small, controllable implementations for ablation, debugging, and architectural study.</p>
+<h2>Main Idea</h2>
+<p>Nano World Models provides a compact experimental substrate for future video prediction. The project emphasizes:</p>
+<ul>
+<li>Unified interfaces for objectives and model scales.</li>
+<li>Action-conditioning mechanisms.</li>
+<li>Latent observation spaces.</li>
+<li>Datasets and evaluation protocols.</li>
+<li>Long-horizon rollout procedures.</li>
+</ul>
+<p>The paper&#39;s value is not only a new model; it is a reproducible framework for studying why world models work or fail.</p>
+<h2>Technical Reading</h2>
+<p>The design is centered around future video prediction and diffusion forcing. The key engineering insight is that many world-model papers entangle too many decisions: dataset, architecture, conditioning, sampler, rollout length, and evaluation. Nano World Models tries to make these factors separable.</p>
+<p>This matters because long-horizon rollout quality is sensitive to small implementation details. A compact codebase makes it easier to inspect error accumulation, action injection, and sampling budget trade-offs.</p>
+<h2>Experiments And Evidence</h2>
+<p>The work studies simple control environments, game simulation, and real-robot data. It examines how:</p>
+<ul>
+<li>Prediction parameterization changes rollout behavior.</li>
+<li>Architecture scale changes quality.</li>
+<li>Action injection changes controllability.</li>
+<li>Sampling budget changes inference cost.</li>
+<li>Domain complexity changes robustness.</li>
+</ul>
+<h2>Strengths</h2>
+<ul>
+<li>High practical value for reproducible world-model research.</li>
+<li>Useful for debugging and ablation.</li>
+<li>Bridges small control tasks, games, and real-robot data.</li>
+<li>Provides a foundation for internal company research infrastructure.</li>
+</ul>
+<h2>Limitations</h2>
+<ul>
+<li>Minimalism means it may not match frontier-scale video systems.</li>
+<li>Results from compact systems may not fully transfer to very large DiT or multimodal video models.</li>
+<li>It is a research substrate more than a production simulator.</li>
+</ul>
+<h2>Relevance To World Models</h2>
+<p>Nano World Models is the &quot;build your own world model lab&quot; entry in this weekly batch. For teams without hyperscale compute, this may be more immediately useful than a larger model release.</p>
+<h2>Product Implication</h2>
+<p>For robotics and companion AI, this kind of framework can become the internal testbed for:</p>
+<ul>
+<li>Action-conditioned video prediction.</li>
+<li>Simulated user-robot interaction.</li>
+<li>Policy learning from video.</li>
+<li>Ablating memory, action, and perception modules before scaling.</li>
+</ul>
+      </article>
+    </main>
+    <script>
+      const searchInput = document.querySelector("#paperSearch");
+      const clearButton = document.querySelector("#clearSearch");
+      const searchStatus = document.querySelector("#searchStatus");
+      const cards = Array.from(document.querySelectorAll(".hotspot-card, .paper-card, .watch-card"));
+
+      function normalize(text) {
+        return (text || "").toLowerCase().trim();
+      }
+
+      function searchableText(card) {
+        return normalize([card.textContent, card.dataset.search].join(" "));
+      }
+
+      function applySearch() {
+        if (!searchInput || !searchStatus) return;
+        const query = normalize(searchInput.value);
+        const terms = query.split(/\s+/).filter(Boolean);
+        let visibleCount = 0;
+
+        cards.forEach((card) => {
+          const matched = terms.length === 0 || terms.every((term) => searchableText(card).includes(term));
+          card.hidden = !matched;
+          if (matched) visibleCount += 1;
+        });
+
+        searchStatus.textContent = terms.length === 0 ? "显示全部条目" : "找到 " + visibleCount + " 个相关条目";
+      }
+
+      searchInput?.addEventListener("input", applySearch);
+      clearButton?.addEventListener("click", () => {
+        searchInput.value = "";
+        applySearch();
+        searchInput.focus();
+      });
+    </script>
+  </body>
+</html>

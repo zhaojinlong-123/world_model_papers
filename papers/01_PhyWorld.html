@@ -1,0 +1,118 @@
+﻿<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>PhyWorld | Paper Report</title>
+    <link rel="stylesheet" href="../styles.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="brand" href="../index.html">World Model Weekly</a>
+      <nav>
+        <a href="../index.html#latest">本周热点</a>
+        <a href="../index.html#papers">论文报告</a>
+        <a href="../index.html#watchlist">重点机构</a>
+        <a href="../index.html#interest">兴趣方向</a>
+        <a href="../index.html#trend">趋势总结</a>
+      </nav>
+    </header>
+    <main class="page-shell">
+      <section class="paper-hero">
+        <a class="back-link" href="../index.html#papers">← 返回本周论文列表</a>
+        <p class="eyebrow">Physics World Model</p>
+        <h1>PhyWorld</h1>
+        <div class="paper-actions">
+          <a class="button" href="../../papers/01_PhyWorld_2605.19242.pdf" target="_blank" rel="noreferrer">打开原论文 PDF</a>
+        </div>
+      </section>
+      <article class="article-body">
+<h1>01. PhyWorld: Physics-Faithful World Model for Video Generation</h1>
+<h2>Metadata</h2>
+<ul>
+<li>arXiv: https://arxiv.org/abs/2605.19242</li>
+<li>PDF: `../papers/01_PhyWorld_2605.19242.pdf`</li>
+<li>Topic: physics-faithful video world model, video continuation, Physical AI simulation</li>
+<li>Recency: submitted in May 2026, closest to the requested weekly window among the selected papers</li>
+</ul>
+<h2>Core Problem</h2>
+<p>General video generation models can create visually plausible continuations, but a world model for Physical AI must preserve physical state and evolve according to consistent dynamics. The gap is not merely visual realism; it is whether generated futures remain useful for simulation, policy training, planning, and safety testing.</p>
+<h2>Main Idea</h2>
+<p>PhyWorld treats large video generators as a base world simulator and applies two-stage post-training:</p>
+<ul>
+<li>Video-to-video continuation fine-tuning to stabilize appearance and motion across frames.</li>
+<li>Preference alignment toward physically plausible dynamics using physics preference pairs.</li>
+</ul>
+<p>This is important because it reframes world-model improvement as post-training and alignment rather than full model retraining from scratch.</p>
+<h2>Technical Reading</h2>
+<p>The paper is valuable because it separates two failure modes:</p>
+<ul>
+<li>Temporal inconsistency: the generated scene drifts visually or semantically.</li>
+<li>Physical inconsistency: objects behave in ways that violate expected dynamics even if the clip looks sharp.</li>
+</ul>
+<p>The first stage addresses continuity; the second stage addresses physical faithfulness. This mirrors the trajectory in language-model alignment: pretraining produces broad capability, while preference tuning makes behavior more useful for a target domain.</p>
+<h2>Experiments And Evidence</h2>
+<p>The reported evaluation combines general video-quality benchmarks with a dedicated physical-faithfulness benchmark. The key signal is that ordinary video metrics alone are insufficient; world-model evaluation needs physical-law-oriented scoring.</p>
+<p>The paper reports improved VBench consistency and improved physical-faithfulness scoring versus strong baselines. The exact numbers should be treated as benchmark-specific, but the direction is highly relevant: physics-aware post-training can improve world simulation without destroying visual quality.</p>
+<h2>Strengths</h2>
+<ul>
+<li>Targets a real bottleneck: physical plausibility rather than only photorealism.</li>
+<li>Uses post-training, which is practical for companies building on existing video models.</li>
+<li>Introduces an evaluation framing that better matches embodied AI needs.</li>
+</ul>
+<h2>Limitations</h2>
+<ul>
+<li>Preference data quality becomes central. If the preference pairs are narrow, the resulting model may overfit a limited physics prior.</li>
+<li>Physical faithfulness is hard to evaluate in open-world scenes.</li>
+<li>Video consistency still does not guarantee action-level controllability.</li>
+</ul>
+<h2>Relevance To World Models</h2>
+<p>PhyWorld is a strong example of the shift from &quot;video generation as media synthesis&quot; to &quot;video generation as simulation substrate.&quot; For robotics or companion robots, this direction matters because safe pre-deployment testing needs physically plausible imagined futures.</p>
+<h2>Product Implication</h2>
+<p>For an embodied companion robot company, PhyWorld suggests a practical roadmap:</p>
+<ul>
+<li>Start from a capable video model.</li>
+<li>Fine-tune for scene continuation in target environments.</li>
+<li>Add preference alignment around safety and physics.</li>
+<li>Evaluate against interaction-specific physical rules, not only image quality.</li>
+</ul>
+      </article>
+    </main>
+    <script>
+      const searchInput = document.querySelector("#paperSearch");
+      const clearButton = document.querySelector("#clearSearch");
+      const searchStatus = document.querySelector("#searchStatus");
+      const cards = Array.from(document.querySelectorAll(".hotspot-card, .paper-card, .watch-card"));
+
+      function normalize(text) {
+        return (text || "").toLowerCase().trim();
+      }
+
+      function searchableText(card) {
+        return normalize([card.textContent, card.dataset.search].join(" "));
+      }
+
+      function applySearch() {
+        if (!searchInput || !searchStatus) return;
+        const query = normalize(searchInput.value);
+        const terms = query.split(/\s+/).filter(Boolean);
+        let visibleCount = 0;
+
+        cards.forEach((card) => {
+          const matched = terms.length === 0 || terms.every((term) => searchableText(card).includes(term));
+          card.hidden = !matched;
+          if (matched) visibleCount += 1;
+        });
+
+        searchStatus.textContent = terms.length === 0 ? "显示全部条目" : "找到 " + visibleCount + " 个相关条目";
+      }
+
+      searchInput?.addEventListener("input", applySearch);
+      clearButton?.addEventListener("click", () => {
+        searchInput.value = "";
+        applySearch();
+        searchInput.focus();
+      });
+    </script>
+  </body>
+</html>

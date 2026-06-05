@@ -1,0 +1,121 @@
+﻿<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>LongVie 2 | Paper Report</title>
+    <link rel="stylesheet" href="../styles.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="brand" href="../index.html">World Model Weekly</a>
+      <nav>
+        <a href="../index.html#latest">本周热点</a>
+        <a href="../index.html#papers">论文报告</a>
+        <a href="../index.html#watchlist">重点机构</a>
+        <a href="../index.html#interest">兴趣方向</a>
+        <a href="../index.html#trend">趋势总结</a>
+      </nav>
+    </header>
+    <main class="page-shell">
+      <section class="paper-hero">
+        <a class="back-link" href="../index.html#papers">← 返回本周论文列表</a>
+        <p class="eyebrow">Ultra-long Video</p>
+        <h1>LongVie 2</h1>
+        <div class="paper-actions">
+          <a class="button" href="../../papers/10_LongVie2_2512.13604.pdf" target="_blank" rel="noreferrer">打开原论文 PDF</a>
+        </div>
+      </section>
+      <article class="article-body">
+<h1>10. LongVie 2: Multimodal Controllable Ultra-Long Video World Model</h1>
+<h2>Metadata</h2>
+<ul>
+<li>arXiv: https://arxiv.org/abs/2512.13604</li>
+<li>PDF: `../papers/10_LongVie2_2512.13604.pdf`</li>
+<li>Hugging Face model/project: https://huggingface.co/Vchitect/LongVie2</li>
+<li>Topic: ultra-long video generation, controllable video world model, temporal consistency</li>
+</ul>
+<h2>Core Problem</h2>
+<p>Building a video world model on top of a pretrained video generator requires three properties:</p>
+<ul>
+<li>Controllability.</li>
+<li>Long-term visual quality.</li>
+<li>Temporal consistency.</li>
+</ul>
+<p>Short clips can hide accumulated errors. Ultra-long generation exposes drift, degradation, subject inconsistency, and loss of control.</p>
+<h2>Main Idea</h2>
+<p>LongVie 2 uses an end-to-end autoregressive framework with three stages:</p>
+<ul>
+<li>Multi-modal guidance to integrate dense and sparse controls.</li>
+<li>Degradation-aware training to reduce train-test mismatch during long inference.</li>
+<li>History-context guidance to align adjacent clips and preserve temporal consistency.</li>
+</ul>
+<p>It also introduces LongVGenBench for evaluating high-resolution one-minute videos.</p>
+<h2>Technical Reading</h2>
+<p>The paper is important because it attacks the long-horizon failure mode directly. The transition from five-second clips to one-minute or five-minute videos is not a scaling detail; it changes the nature of the problem. History context and degradation-aware training become central.</p>
+<p>The Hugging Face project card indicates model release and inference instructions, making this paper both a research and implementation reference.</p>
+<h2>Experiments And Evidence</h2>
+<p>The paper reports strong performance in controllability, temporal coherence, visual fidelity, and extended generation. It also reports that all three training stages contribute to performance.</p>
+<h2>Strengths</h2>
+<ul>
+<li>Directly addresses ultra-long temporal consistency.</li>
+<li>Uses multimodal control signals.</li>
+<li>Includes benchmark construction.</li>
+<li>Provides project/model resources.</li>
+</ul>
+<h2>Limitations</h2>
+<ul>
+<li>Heavy compute requirements.</li>
+<li>Long-video benchmarks may still not reflect physical action consistency.</li>
+<li>Visual coherence is not equivalent to accurate world simulation.</li>
+</ul>
+<h2>Relevance To World Models</h2>
+<p>LongVie 2 represents the long-horizon video generation branch of world-model research. It is especially relevant for systems where a model must maintain scene identity and control over minutes, not seconds.</p>
+<h2>Product Implication</h2>
+<p>For companion robots, long-horizon consistency matters for:</p>
+<ul>
+<li>Remembering ongoing interaction state.</li>
+<li>Maintaining user and object identity.</li>
+<li>Generating training simulations over extended episodes.</li>
+<li>Avoiding drift in multi-turn embodied scenarios.</li>
+</ul>
+      </article>
+    </main>
+    <script>
+      const searchInput = document.querySelector("#paperSearch");
+      const clearButton = document.querySelector("#clearSearch");
+      const searchStatus = document.querySelector("#searchStatus");
+      const cards = Array.from(document.querySelectorAll(".hotspot-card, .paper-card, .watch-card"));
+
+      function normalize(text) {
+        return (text || "").toLowerCase().trim();
+      }
+
+      function searchableText(card) {
+        return normalize([card.textContent, card.dataset.search].join(" "));
+      }
+
+      function applySearch() {
+        if (!searchInput || !searchStatus) return;
+        const query = normalize(searchInput.value);
+        const terms = query.split(/\s+/).filter(Boolean);
+        let visibleCount = 0;
+
+        cards.forEach((card) => {
+          const matched = terms.length === 0 || terms.every((term) => searchableText(card).includes(term));
+          card.hidden = !matched;
+          if (matched) visibleCount += 1;
+        });
+
+        searchStatus.textContent = terms.length === 0 ? "显示全部条目" : "找到 " + visibleCount + " 个相关条目";
+      }
+
+      searchInput?.addEventListener("input", applySearch);
+      clearButton?.addEventListener("click", () => {
+        searchInput.value = "";
+        applySearch();
+        searchInput.focus();
+      });
+    </script>
+  </body>
+</html>
