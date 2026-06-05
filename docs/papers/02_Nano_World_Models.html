@@ -28,60 +28,43 @@
         </div>
       </section>
       <article class="article-body">
-<h1>02. Nano World Models: A Minimalist Implementation of Future Video Prediction</h1>
-<h2>Metadata</h2>
+<h1>02. Nano World Models：极简未来视频预测世界模型</h1>
+<h2>基本信息</h2>
 <ul>
 <li>arXiv: https://arxiv.org/abs/2605.23993</li>
 <li>PDF: `../papers/02_Nano_World_Models_2605.23993.pdf`</li>
-<li>Project direction: compact, reproducible world-model implementation</li>
-<li>Topic: future video prediction, diffusion forcing, action conditioning, reproducible research</li>
+<li>主题：未来视频预测、扩散强制、动作条件、可复现实验框架</li>
+<li>关注度：4/5</li>
 </ul>
-<h2>Core Problem</h2>
-<p>World models are becoming large, expensive, and difficult to reproduce. Industry systems may show impressive interactive video generation, but academic and startup teams need small, controllable implementations for ablation, debugging, and architectural study.</p>
-<h2>Main Idea</h2>
-<p>Nano World Models provides a compact experimental substrate for future video prediction. The project emphasizes:</p>
+<h2>一句话总结</h2>
+<p>Nano World Models 的意义不在于追求最大规模，而在于提供一个小而清晰、便于复现和消融的世界模型实验平台。</p>
+<h2>核心问题</h2>
+<p>当前世界模型越来越大，训练成本越来越高，很多系统的细节难以复现。对研究团队和创业公司来说，仅仅知道一个大模型效果好并不够，更重要的是理解哪些设计真正有效：数据、模型结构、动作注入、采样步数、latent 表征、rollout 长度、评估协议分别起什么作用。</p>
+<h2>方法理解</h2>
+<p>这项工作围绕未来视频预测构建极简实现，重点强调统一接口、动作条件、latent observation space、数据集配置和长时序 rollout。它试图把世界模型研究中的多个变量拆开，让研究者可以单独分析每个模块。</p>
+<p>这种“nano”思路非常适合内部研究基础设施。相比直接追大模型，先用小系统理解误差累积、动作条件失效、长时序漂移和采样成本，往往更能指导后续扩展。</p>
+<h2>实验与证据</h2>
+<p>论文覆盖简单控制环境、游戏模拟和真实机器人数据，观察不同预测参数化、模型规模、动作注入方式、采样预算和任务复杂度对 rollout 质量的影响。它更像一个实验基座，而不是单点 SOTA 模型。</p>
+<h2>优点</h2>
 <ul>
-<li>Unified interfaces for objectives and model scales.</li>
-<li>Action-conditioning mechanisms.</li>
-<li>Latent observation spaces.</li>
-<li>Datasets and evaluation protocols.</li>
-<li>Long-horizon rollout procedures.</li>
+<li>可复现性高，适合作为内部 world model lab。</li>
+<li>便于做消融实验和工程调试。</li>
+<li>能连接控制环境、游戏和机器人数据。</li>
+<li>对算力有限的团队尤其有价值。</li>
 </ul>
-<p>The paper&#39;s value is not only a new model; it is a reproducible framework for studying why world models work or fail.</p>
-<h2>Technical Reading</h2>
-<p>The design is centered around future video prediction and diffusion forcing. The key engineering insight is that many world-model papers entangle too many decisions: dataset, architecture, conditioning, sampler, rollout length, and evaluation. Nano World Models tries to make these factors separable.</p>
-<p>This matters because long-horizon rollout quality is sensitive to small implementation details. A compact codebase makes it easier to inspect error accumulation, action injection, and sampling budget trade-offs.</p>
-<h2>Experiments And Evidence</h2>
-<p>The work studies simple control environments, game simulation, and real-robot data. It examines how:</p>
+<h2>局限</h2>
 <ul>
-<li>Prediction parameterization changes rollout behavior.</li>
-<li>Architecture scale changes quality.</li>
-<li>Action injection changes controllability.</li>
-<li>Sampling budget changes inference cost.</li>
-<li>Domain complexity changes robustness.</li>
+<li>极简实现不一定能代表前沿大规模视频模型能力。</li>
+<li>小模型中的结论迁移到 DiT、多模态大模型时需要重新验证。</li>
+<li>更偏研究平台，不是直接可产品化的仿真系统。</li>
 </ul>
-<h2>Strengths</h2>
+<h2>对具身智能的启示</h2>
+<p>陪伴机器人公司可以把这类框架作为内部试验台，用来验证动作条件视频预测、用户互动模拟、策略学习和记忆模块。如果直接上大模型，很容易只看到结果，无法定位失败原因；而小模型能帮助团队更快建立工程直觉。</p>
+<h2>后续跟踪点</h2>
 <ul>
-<li>High practical value for reproducible world-model research.</li>
-<li>Useful for debugging and ablation.</li>
-<li>Bridges small control tasks, games, and real-robot data.</li>
-<li>Provides a foundation for internal company research infrastructure.</li>
-</ul>
-<h2>Limitations</h2>
-<ul>
-<li>Minimalism means it may not match frontier-scale video systems.</li>
-<li>Results from compact systems may not fully transfer to very large DiT or multimodal video models.</li>
-<li>It is a research substrate more than a production simulator.</li>
-</ul>
-<h2>Relevance To World Models</h2>
-<p>Nano World Models is the &quot;build your own world model lab&quot; entry in this weekly batch. For teams without hyperscale compute, this may be more immediately useful than a larger model release.</p>
-<h2>Product Implication</h2>
-<p>For robotics and companion AI, this kind of framework can become the internal testbed for:</p>
-<ul>
-<li>Action-conditioned video prediction.</li>
-<li>Simulated user-robot interaction.</li>
-<li>Policy learning from video.</li>
-<li>Ablating memory, action, and perception modules before scaling.</li>
+<li>是否能接入真实家庭视频和机器人操作数据。</li>
+<li>是否能加入语言指令和 VLA 输入。</li>
+<li>是否能形成稳定的内部 benchmark，用于每周评估新方法。</li>
 </ul>
       </article>
     </main>

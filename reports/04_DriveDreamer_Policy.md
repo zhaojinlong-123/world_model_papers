@@ -1,58 +1,49 @@
-# 04. DriveDreamer-Policy: A Geometry-Grounded World-Action Model for Unified Generation and Planning
+# 04. DriveDreamer-Policy：几何约束的世界-动作模型
 
-## Metadata
+## 基本信息
 
 - arXiv: https://arxiv.org/abs/2604.01765
 - PDF: `../papers/04_DriveDreamer_Policy_2604.01765.pdf`
-- Topic: world-action model, autonomous driving, future video generation, depth, planning
+- 主题：world-action model、自动驾驶、几何约束、语言条件、动作规划
+- 关注度：5/5
 
-## Core Problem
+## 一句话总结
 
-World-action models try to combine VLA-style reasoning with world-model prediction. Existing systems often focus on 2D appearance or latent prediction, but embodied systems need geometric grounding. In driving, a visually plausible imagined future is not enough; planning depends on depth, layout, and motion.
+DriveDreamer-Policy 展示了世界模型和动作策略融合的方向：模型不仅预测未来场景，还要在几何和指令约束下支持决策。
 
-## Main Idea
+## 核心问题
 
-DriveDreamer-Policy integrates:
+很多视频世界模型只能生成未来画面，但不能稳定回答“该怎么行动”。自动驾驶和机器人都需要模型理解环境几何、行动约束和未来风险。单纯视频生成如果没有动作接口，很难转化为规划能力。
 
-- Language instruction processing.
-- Multi-view images.
-- Action inputs.
-- Depth generation.
-- Future video generation.
-- Motion planning.
+## 方法理解
 
-The architecture is modular: a large language model handles instructions and context, while lightweight generators produce depth, future video, and actions.
+这项工作把世界预测和动作策略放在一个更统一的框架中。它利用几何信息约束未来场景生成，并结合语言或高层指令，使模型能够在预测未来的同时服务于策略决策。
 
-## Technical Reading
+它的关键意义是 world-action model。也就是说，世界模型不只是被动预测环境，而是要理解动作如何改变未来。对机器人而言，这比普通视频生成更接近可用系统。
 
-The most important contribution is the explicit coupling of geometry and action. Depth is not merely an auxiliary visualization; it is used to improve future prediction and planning robustness. The system is a concrete example of a world-action model where imagination and control share representation.
+## 实验与证据
 
-## Experiments And Evidence
+论文通过自动驾驶相关任务展示几何约束和动作条件对预测与规划的帮助。虽然场景主要是驾驶，但方法思想可以迁移到移动机器人、家庭机器人和服务机器人：行动必须发生在物理和语义约束之内。
 
-The paper reports strong performance on Navsim v1 and v2. It also reports improved future video and depth prediction quality, and ablations showing that explicit depth learning improves planning robustness.
+## 优点
 
-## Strengths
+- 明确连接世界模型和动作规划。
+- 几何约束提升未来预测的可用性。
+- 语言/指令条件增强模型与高层任务的接口。
+- 对 VLA 和机器人策略研究有参考价值。
 
-- Strong embodied-AI framing.
-- Unified generation and planning.
-- Geometry-aware design improves physical grounding.
-- Modular architecture is easier to deploy than a monolithic model.
+## 局限
 
-## Limitations
+- 自动驾驶场景结构相对规则，迁移到家庭环境会更复杂。
+- 生成未来与真实安全决策之间仍需要严格验证。
+- 高质量几何输入和标注成本可能较高。
 
-- Driving is structured compared with household robotics.
-- Geometry quality can become a bottleneck.
-- Language instruction handling may not generalize to messy real-world human interaction without further grounding.
+## 对具身智能的启示
 
-## Relevance To World Models
+陪伴机器人需要理解“我做这个动作会发生什么”。例如靠近用户、递物、避障、转头、移动到某个位置，都不是单纯的视频预测问题，而是动作条件预测问题。DriveDreamer-Policy 的路线说明，未来机器人系统需要把语言、几何、视觉世界模型和策略规划融合起来。
 
-DriveDreamer-Policy is a clean example of the convergence between world models and VLA systems. It shows how future video generation can become a planning tool rather than a standalone generative model.
+## 后续跟踪点
 
-## Product Implication
-
-For companion robots, the same architectural pattern is relevant:
-
-- Use language for intent.
-- Use perception for scene state.
-- Use world prediction for possible futures.
-- Use action heads for safe execution.
+- 是否能扩展到室内多物体交互。
+- 是否能和 VLA 模型共享动作表示。
+- 是否能建立面向家庭机器人的 world-action benchmark。

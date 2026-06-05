@@ -28,51 +28,43 @@
         </div>
       </section>
       <article class="article-body">
-<h1>07. WorldCache: Content-Aware Caching for Accelerated Video World Models</h1>
-<h2>Metadata</h2>
+<h1>07. WorldCache Content-Aware：面向世界模型的内容感知缓存</h1>
+<h2>基本信息</h2>
 <ul>
 <li>arXiv: https://arxiv.org/abs/2603.22286</li>
 <li>PDF: `../papers/07_WorldCache_Content_Aware_2603.22286.pdf`</li>
-<li>Hugging Face Papers: https://huggingface.co/papers/2603.22286</li>
-<li>alphaXiv: https://www.alphaxiv.org/overview/2603.22286</li>
-<li>Topic: acceleration, caching, DiT video world models</li>
+<li>主题：世界模型加速、内容感知缓存、低延迟视频生成、推理优化</li>
+<li>关注度：4/5</li>
 </ul>
-<h2>Core Problem</h2>
-<p>Video world models based on diffusion transformers are expensive because they require repeated denoising and spatio-temporal attention. For interactive world simulation, latency is not a side issue; it determines whether the model can be used in control loops.</p>
-<h2>Main Idea</h2>
-<p>WorldCache proposes perception-constrained dynamic caching. Instead of blindly reusing features, it decides:</p>
+<h2>一句话总结</h2>
+<p>WorldCache Content-Aware 的价值在于提醒我们：世界模型能不能落地，不只取决于生成质量，还取决于能否足够快、足够便宜地运行。</p>
+<h2>核心问题</h2>
+<p>视频世界模型和长时序生成通常计算量巨大。如果机器人要持续预测未来、模拟交互或在云端生成训练数据，推理成本会成为主要瓶颈。很多相邻帧或相邻生成步骤存在重复信息，完全重新计算会浪费大量资源。</p>
+<h2>方法理解</h2>
+<p>这项工作根据内容变化程度决定哪些计算可以复用、哪些 token 或特征需要重新处理。简单说，它让模型把算力花在真正变化的地方，而不是每一步都全量计算。</p>
+<p>内容感知缓存比固定缓存更灵活，因为视频和世界状态的变化是不均匀的。有些区域几乎静止，有些区域变化剧烈，理想的推理系统应该动态分配计算。</p>
+<h2>实验与证据</h2>
+<p>论文展示了在保持生成质量的同时降低推理成本和延迟的可能性。对于世界模型，这类优化的意义很大，因为交互式系统对延迟敏感，不能只追离线生成质量。</p>
+<h2>优点</h2>
 <ul>
-<li>When to reuse cached features.</li>
-<li>Which regions or tokens are safe to reuse.</li>
-<li>How to approximate updates through blending and warping.</li>
+<li>直接面向部署瓶颈。</li>
+<li>与多种视频生成和世界模型架构可能兼容。</li>
+<li>有助于长视频和交互式生成。</li>
+<li>对端侧或边缘设备尤其重要。</li>
 </ul>
-<p>It uses motion-adaptive thresholds, saliency-weighted drift estimation, and phase-aware threshold scheduling.</p>
-<h2>Technical Reading</h2>
-<p>The key insight is that world-model videos are not uniformly dynamic. Some regions remain stable while others drive perceptual or physical change. A good cache should respect motion and saliency rather than relying on global drift alone.</p>
-<p>This directly attacks artifacts common in naive caching: ghosting, blur, and motion inconsistency.</p>
-<h2>Experiments And Evidence</h2>
-<p>The paper reports approximately 2.3x inference speedup on Cosmos-Predict2.5-2B while preserving 99.4% of baseline quality. The exact benchmark should be interpreted in context, but the result demonstrates that training-free acceleration can be meaningful for large video world models.</p>
-<h2>Strengths</h2>
+<h2>局限</h2>
 <ul>
-<li>Training-free acceleration.</li>
-<li>Targets video world models specifically.</li>
-<li>Considers motion and saliency.</li>
-<li>Strong product relevance for interactive systems.</li>
+<li>缓存策略需要避免累积误差。</li>
+<li>对剧烈变化场景，加速收益可能下降。</li>
+<li>工程实现需要和具体模型结构深度适配。</li>
 </ul>
-<h2>Limitations</h2>
+<h2>对具身智能的启示</h2>
+<p>陪伴机器人如果要实时使用世界模型，必须控制延迟和成本。内容感知缓存可以用于低频生成高质量未来，高频维护轻量 latent 预测，让系统在体验和成本之间取得平衡。</p>
+<h2>后续跟踪点</h2>
 <ul>
-<li>Caching is an optimization layer, not a better world model by itself.</li>
-<li>Failure cases may appear in high-motion or highly chaotic scenes.</li>
-<li>Quality-preservation metrics may not capture downstream planning error.</li>
-</ul>
-<h2>Relevance To World Models</h2>
-<p>WorldCache represents a practical systems trend: world models need not only better quality but also better throughput. Without acceleration, world models remain demos rather than interactive simulators.</p>
-<h2>Product Implication</h2>
-<p>For companion robots, low-latency imagination matters. Caching methods like this could support:</p>
-<ul>
-<li>Fast imagined rollouts for action selection.</li>
-<li>Real-time visual prediction.</li>
-<li>Lower cloud cost for deployed robot fleets.</li>
+<li>是否能与机器人实时感知帧率匹配。</li>
+<li>是否能和 attention cache、KV cache、token pruning 结合。</li>
+<li>对安全相关区域是否应降低缓存复用、提高计算精度。</li>
 </ul>
       </article>
     </main>

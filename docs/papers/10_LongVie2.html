@@ -28,57 +28,43 @@
         </div>
       </section>
       <article class="article-body">
-<h1>10. LongVie 2: Multimodal Controllable Ultra-Long Video World Model</h1>
-<h2>Metadata</h2>
+<h1>10. LongVie 2：超长视频生成与长时序一致性</h1>
+<h2>基本信息</h2>
 <ul>
 <li>arXiv: https://arxiv.org/abs/2512.13604</li>
 <li>PDF: `../papers/10_LongVie2_2512.13604.pdf`</li>
-<li>Hugging Face model/project: https://huggingface.co/Vchitect/LongVie2</li>
-<li>Topic: ultra-long video generation, controllable video world model, temporal consistency</li>
+<li>主题：超长视频生成、长时序一致性、跨片段记忆、可控视频世界模型</li>
+<li>关注度：5/5</li>
 </ul>
-<h2>Core Problem</h2>
-<p>Building a video world model on top of a pretrained video generator requires three properties:</p>
+<h2>一句话总结</h2>
+<p>LongVie 2 聚焦超长视频生成中的一致性和漂移问题，对需要长期模拟和持续交互的世界模型非常重要。</p>
+<h2>核心问题</h2>
+<p>短视频生成已经取得很大进展，但长视频仍然容易出现身份变化、场景漂移、动作断裂和语义遗忘。对于机器人和虚拟仿真来说，任务往往持续数分钟甚至更久，模型必须能记住此前状态并保持未来合理。</p>
+<h2>方法理解</h2>
+<p>LongVie 2 关注长时序生成中的历史上下文、跨片段一致性和退化控制。它的核心不是单帧质量，而是如何让视频在更长时间尺度上维持角色、场景、物体和动作关系。</p>
+<p>从世界模型角度看，长视频生成就是长期 rollout。任何短期误差都会在多步预测中累积，因此长时序一致性是世界模型能否用于训练和仿真的关键。</p>
+<h2>实验与证据</h2>
+<p>论文展示了更长视频生成能力和跨片段一致性的提升。重要信号是：研究重点正在从“几秒钟漂亮视频”转向“更长时间、更稳定状态、更可控过程”。</p>
+<h2>优点</h2>
 <ul>
-<li>Controllability.</li>
-<li>Long-term visual quality.</li>
-<li>Temporal consistency.</li>
+<li>直接处理长时序漂移。</li>
+<li>对视频世界模型和仿真数据生成有价值。</li>
+<li>有助于建立长期交互和任务过程模拟。</li>
+<li>与记忆模块和分层规划可以结合。</li>
 </ul>
-<p>Short clips can hide accumulated errors. Ultra-long generation exposes drift, degradation, subject inconsistency, and loss of control.</p>
-<h2>Main Idea</h2>
-<p>LongVie 2 uses an end-to-end autoregressive framework with three stages:</p>
+<h2>局限</h2>
 <ul>
-<li>Multi-modal guidance to integrate dense and sparse controls.</li>
-<li>Degradation-aware training to reduce train-test mismatch during long inference.</li>
-<li>History-context guidance to align adjacent clips and preserve temporal consistency.</li>
+<li>长视频生成成本高。</li>
+<li>生成结果仍可能缺少真实物理可验证性。</li>
+<li>对交互式动作控制支持有限，需要和 world-action model 结合。</li>
 </ul>
-<p>It also introduces LongVGenBench for evaluating high-resolution one-minute videos.</p>
-<h2>Technical Reading</h2>
-<p>The paper is important because it attacks the long-horizon failure mode directly. The transition from five-second clips to one-minute or five-minute videos is not a scaling detail; it changes the nature of the problem. History context and degradation-aware training become central.</p>
-<p>The Hugging Face project card indicates model release and inference instructions, making this paper both a research and implementation reference.</p>
-<h2>Experiments And Evidence</h2>
-<p>The paper reports strong performance in controllability, temporal coherence, visual fidelity, and extended generation. It also reports that all three training stages contribute to performance.</p>
-<h2>Strengths</h2>
+<h2>对具身智能的启示</h2>
+<p>陪伴机器人的交互不是 5 秒短片，而是持续数小时、数天甚至数年的关系。LongVie 2 代表的长时序能力，可以帮助机器人模拟长期场景变化、生成训练数据、维护用户互动上下文，并减少短期模型带来的记忆断裂。</p>
+<h2>后续跟踪点</h2>
 <ul>
-<li>Directly addresses ultra-long temporal consistency.</li>
-<li>Uses multimodal control signals.</li>
-<li>Includes benchmark construction.</li>
-<li>Provides project/model resources.</li>
-</ul>
-<h2>Limitations</h2>
-<ul>
-<li>Heavy compute requirements.</li>
-<li>Long-video benchmarks may still not reflect physical action consistency.</li>
-<li>Visual coherence is not equivalent to accurate world simulation.</li>
-</ul>
-<h2>Relevance To World Models</h2>
-<p>LongVie 2 represents the long-horizon video generation branch of world-model research. It is especially relevant for systems where a model must maintain scene identity and control over minutes, not seconds.</p>
-<h2>Product Implication</h2>
-<p>For companion robots, long-horizon consistency matters for:</p>
-<ul>
-<li>Remembering ongoing interaction state.</li>
-<li>Maintaining user and object identity.</li>
-<li>Generating training simulations over extended episodes.</li>
-<li>Avoiding drift in multi-turn embodied scenarios.</li>
+<li>是否能和 TeleWorld 类 4D 记忆结合。</li>
+<li>是否能支持动作条件和用户意图控制。</li>
+<li>是否能用于生成机器人长期交互训练数据。</li>
 </ul>
       </article>
     </main>

@@ -1,58 +1,49 @@
-# 09. TeleWorld: Towards Dynamic Multimodal Synthesis with a 4D World Model
+# 09. TeleWorld：面向 4D 世界建模的长期场景记忆
 
-## Metadata
+## 基本信息
 
 - arXiv: https://arxiv.org/abs/2601.00051
 - PDF: `../papers/09_TeleWorld_2601.00051.pdf`
-- Topic: 4D world model, multimodal synthesis, dynamic scene reconstruction, memory
+- 主题：4D 世界模型、长期场景记忆、多视角一致性、动态世界生成
+- 关注度：5/5
 
-## Core Problem
+## 一句话总结
 
-Video generation models can produce impressive clips, but practical world models need long-horizon consistency, interaction, and persistent scene memory. A video-only model may forget spatial layout or drift across time.
+TeleWorld 的重要性在于把世界模型从短视频片段推进到持续存在的 4D 世界状态，这对具身智能长期交互非常关键。
 
-## Main Idea
+## 核心问题
 
-TeleWorld proposes a real-time multimodal 4D world-modeling framework that unifies:
+许多视频生成模型只处理短片段，片段之间容易断裂。机器人和人类交互却是长期连续的：房间布局、物体位置、用户习惯和历史事件都需要被记住。如果模型没有持久世界状态，就难以支持长期陪伴和稳定行动。
 
-- Video generation.
-- Dynamic scene reconstruction.
-- Long-term world memory.
-- Closed-loop guidance between generation and reconstruction.
+## 方法理解
 
-The central paradigm is generation-reconstruction-guidance: generated streams are reconstructed into a dynamic 4D representation, which guides future generation.
+TeleWorld 关注动态 4D 世界建模，即在时间维度上维护场景结构和变化。它试图让生成或预测结果不只是孤立视频，而是能回到一个连续世界中，保持空间、时间和多视角一致性。
 
-## Technical Reading
+这个方向和机器人记忆高度相关。机器人看到的不只是画面，而是一个持续存在的家、用户和物品系统。
 
-TeleWorld's key contribution is the feedback loop. Rather than treating generated video as the final product, it treats video as something that should be reconstructed into a persistent spatial-temporal world state.
+## 实验与证据
 
-This is highly relevant because world models need memory. If the system cannot preserve object layout, identity, and scene structure over time, it cannot support long-horizon planning or interactive embodiment.
+论文围绕多视角、长期一致性和动态世界生成展示能力。它的价值不只是生成质量，而是把“世界”作为长期对象来建模，而不是把视频当作一次性输出。
 
-## Experiments And Evidence
+## 优点
 
-The work reports improvements in static and dynamic world understanding, long-term consistency, and real-time generation efficiency. It also uses hierarchical planning and distillation methods to reduce latency.
+- 强调长期世界状态和 4D 一致性。
+- 与空间记忆、地图、场景图天然相关。
+- 对长时序互动和多视角观察有启发。
+- 适合连接视频生成和机器人环境理解。
 
-## Strengths
+## 局限
 
-- Moves beyond pure video generation toward 4D state.
-- Explicitly addresses memory and closed-loop consistency.
-- Relevant to interactive and embodied scenarios.
-- Connects generation with reconstruction.
+- 4D 世界表示成本高，维护复杂。
+- 开放家庭环境中的动态对象、人和遮挡很难处理。
+- 与真实机器人传感器、SLAM、语义地图结合仍需工程验证。
 
-## Limitations
+## 对具身智能的启示
 
-- Complex system integration.
-- Real-time 4D reconstruction may be compute-intensive.
-- Evaluation of "world memory" remains difficult.
+情感陪伴机器人需要长期记住用户和家庭空间，例如用户喜欢坐在哪里、物品通常放在哪里、哪些区域需要避让。TeleWorld 提醒我们，世界模型必须有记忆，而不是每次从当前帧重新开始。
 
-## Relevance To World Models
+## 后续跟踪点
 
-TeleWorld is one of the clearest examples of the direction from video clips to persistent interactive worlds.
-
-## Product Implication
-
-For companion robots, TeleWorld-style architecture is relevant for:
-
-- Remembering room layout.
-- Maintaining persistent user/object state.
-- Predicting scene evolution over multiple interactions.
-- Combining generated imagination with reconstructed real context.
+- 是否能和机器人 SLAM、3D Gaussian、scene graph 结合。
+- 是否能维护用户偏好和空间状态的统一记忆。
+- 是否能支持长期家庭交互数据的持续更新。

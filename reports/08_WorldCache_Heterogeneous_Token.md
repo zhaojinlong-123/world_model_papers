@@ -1,58 +1,49 @@
-# 08. WorldCache: Accelerating World Models for Free via Heterogeneous Token Caching
+# 08. WorldCache Heterogeneous Token Caching：异构 token 缓存加速世界模型
 
-## Metadata
+## 基本信息
 
 - arXiv: https://arxiv.org/abs/2603.06331
 - PDF: `../papers/08_WorldCache_Heterogeneous_Token_2603.06331.pdf`
-- Hugging Face Papers: https://huggingface.co/papers/2603.06331
-- Topic: heterogeneous token caching, diffusion world model acceleration
+- 主题：token 级缓存、异构计算复用、视频生成加速、世界模型部署
+- 关注度：4/5
 
-## Core Problem
+## 一句话总结
 
-Generic diffusion caching policies do not transfer cleanly to world models. World models have multimodal coupling, spatially varying tokens, and non-uniform temporal dynamics. Some tokens are stable, some are predictable, and some are chaotic. Uniform skipping is either unsafe or too conservative.
+这篇 WorldCache 工作从 token 层面优化重复计算，是视频世界模型走向实时交互和产品部署的重要工程方向。
 
-## Main Idea
+## 核心问题
 
-This WorldCache variant introduces:
+长视频生成和世界模型推理中，大量 token 在时间上具有相似性。如果每一步都对所有 token 做完整计算，会导致成本高、延迟大、难以实时使用。问题在于：如何判断哪些 token 值得重新计算，哪些可以安全复用。
 
-- Curvature-guided heterogeneous token prediction.
-- Hermite-guided damped prediction for chaotic tokens.
-- Chaotic-prioritized adaptive skipping.
-- Curvature-normalized drift estimation.
+## 方法理解
 
-The model selectively recomputes only the tokens that begin to drift.
+论文提出异构 token 缓存机制，对不同 token 使用不同缓存和更新策略。它不是粗暴地缓存整帧或整层，而是在更细粒度上区分变化强度和重要性，从而提高复用效率。
 
-## Technical Reading
+这类方法对世界模型尤其关键。世界模型通常需要长时序、一致性和交互性，如果每次未来预测都很慢，机器人就无法在真实环境中频繁调用。
 
-This paper focuses on token-level dynamics rather than region-level perceptual caching. The key idea is to classify tokens by temporal behavior:
+## 实验与证据
 
-- Stable tokens can be reused.
-- Smooth tokens can be extrapolated.
-- Chaotic tokens need careful updating.
+论文展示了 token 缓存可以降低推理成本，同时尽量保持生成质量。对这类工作，最重要的评价不是单纯画质，而是质量、延迟、吞吐、长时序稳定性之间的综合权衡。
 
-This framing makes caching closer to a lightweight dynamics model.
+## 优点
 
-## Experiments And Evidence
+- 细粒度 token 级优化，理论上更灵活。
+- 适合长视频和多步 rollout。
+- 可以和其他加速技术叠加。
+- 对交互式世界模型很有价值。
 
-The paper reports up to 3.7x end-to-end speedup while maintaining around 98% rollout quality. The important takeaway is that the speedup comes without retraining, making it attractive for deployment.
+## 局限
 
-## Strengths
+- 缓存错误可能导致细节漂移或状态不一致。
+- 不同模型结构下需要重新调参。
+- 加速收益与场景变化模式强相关。
 
-- Strong speedup.
-- Training-free and model-compatible.
-- Uses world-model-specific temporal structure.
-- Good fit for resource-constrained inference.
+## 对具身智能的启示
 
-## Limitations
+机器人内部世界模型不能每次都从零预测未来。合理的设计应该复用稳定背景、静态对象和历史状态，把计算集中在用户、机器人动作、动态物体和安全关键区域。异构 token 缓存提供了一个可借鉴的工程思路。
 
-- Speed-quality trade-off may vary significantly by scene.
-- It may be hard to know whether skipped chaotic tokens harm planning until downstream tests are run.
-- It does not solve semantic or physical inconsistency.
+## 后续跟踪点
 
-## Relevance To World Models
-
-This paper reinforces a key trend: inference optimization is now part of world-model research. The best simulator is not just the most accurate but the one that can run fast enough to be useful.
-
-## Product Implication
-
-For robot products, heterogeneous caching could reduce inference cost and enable more frequent world-state prediction under limited compute budgets.
+- 是否能结合 3D/4D 场景记忆进行缓存。
+- 是否能根据安全风险动态调整 token 更新频率。
+- 是否能在端侧芯片或低功耗设备上稳定运行。

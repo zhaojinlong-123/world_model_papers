@@ -1,61 +1,48 @@
-# 01. PhyWorld: Physics-Faithful World Model for Video Generation
+# 01. PhyWorld：面向视频生成的物理一致世界模型
 
-## Metadata
+## 基本信息
 
 - arXiv: https://arxiv.org/abs/2605.19242
 - PDF: `../papers/01_PhyWorld_2605.19242.pdf`
-- Topic: physics-faithful video world model, video continuation, Physical AI simulation
-- Recency: submitted in May 2026, closest to the requested weekly window among the selected papers
+- 主题：物理一致视频生成、世界模型、Physical AI 仿真、视频续写
+- 关注度：5/5
 
-## Core Problem
+## 一句话总结
 
-General video generation models can create visually plausible continuations, but a world model for Physical AI must preserve physical state and evolve according to consistent dynamics. The gap is not merely visual realism; it is whether generated futures remain useful for simulation, policy training, planning, and safety testing.
+PhyWorld 的核心价值是把视频生成模型从“视觉上合理”推进到“物理上更可信”，使其更接近可用于具身智能训练、仿真和安全测试的世界模型。
 
-## Main Idea
+## 核心问题
 
-PhyWorld treats large video generators as a base world simulator and applies two-stage post-training:
+普通视频生成模型可以生成清晰、流畅、看起来真实的视频，但这并不等于它理解物理世界。对于机器人和 Physical AI，世界模型必须尽量保持物体状态、运动趋势、接触关系和因果变化。如果模型生成的视频违反常识物理，例如物体凭空漂移、碰撞后不符合动力学、状态在长时序中丢失，那么它就很难用于策略训练和真实世界决策。
 
-- Video-to-video continuation fine-tuning to stabilize appearance and motion across frames.
-- Preference alignment toward physically plausible dynamics using physics preference pairs.
+## 方法理解
 
-This is important because it reframes world-model improvement as post-training and alignment rather than full model retraining from scratch.
+PhyWorld 采用两阶段后训练路线。第一阶段是视频到视频续写微调，让模型在已有视频条件下生成更连续的未来片段，减少视觉漂移和语义断裂。第二阶段是物理偏好对齐，用偏好数据引导模型更倾向于生成物理合理的未来。
 
-## Technical Reading
+这个思路很务实：它没有要求从零训练一个巨大世界模型，而是在已有强视频模型基础上做领域后训练。对创业团队或产品团队来说，这比完全自研基础模型更可行。
 
-The paper is valuable because it separates two failure modes:
+## 实验与证据
 
-- Temporal inconsistency: the generated scene drifts visually or semantically.
-- Physical inconsistency: objects behave in ways that violate expected dynamics even if the clip looks sharp.
+论文同时关注普通视频质量和物理一致性评估。重要信号不是某一个指标提升，而是评估框架本身的变化：世界模型不能只看画质、清晰度和用户偏好，还需要看物理可信度、状态保持和长时序一致性。
 
-The first stage addresses continuity; the second stage addresses physical faithfulness. This mirrors the trajectory in language-model alignment: pretraining produces broad capability, while preference tuning makes behavior more useful for a target domain.
+## 优点
 
-## Experiments And Evidence
+- 直接瞄准 Physical AI 的关键瓶颈：物理一致性。
+- 使用后训练和偏好对齐，工程路径相对可落地。
+- 把视频生成评估从“好不好看”扩展到“能不能作为模拟器”。
 
-The reported evaluation combines general video-quality benchmarks with a dedicated physical-faithfulness benchmark. The key signal is that ordinary video metrics alone are insufficient; world-model evaluation needs physical-law-oriented scoring.
+## 局限
 
-The paper reports improved VBench consistency and improved physical-faithfulness scoring versus strong baselines. The exact numbers should be treated as benchmark-specific, but the direction is highly relevant: physics-aware post-training can improve world simulation without destroying visual quality.
+- 物理偏好数据的质量决定上限，偏好覆盖不足会导致模型只学到局部物理规律。
+- 开放家庭场景的物理一致性很难全面评估。
+- 物理合理的视频并不自动等于动作可控，还需要 action conditioning 和策略接口。
 
-## Strengths
+## 对具身智能的启示
 
-- Targets a real bottleneck: physical plausibility rather than only photorealism.
-- Uses post-training, which is practical for companies building on existing video models.
-- Introduces an evaluation framing that better matches embodied AI needs.
+对于情感陪伴机器人，PhyWorld 提示我们：视频世界模型不能只用于展示，还应该成为内部仿真层。机器人可以在行动前生成可能后果，用于安全检查、用户意图理解和长期互动规划。但前提是模型必须通过物理和安全偏好对齐。
 
-## Limitations
+## 后续跟踪点
 
-- Preference data quality becomes central. If the preference pairs are narrow, the resulting model may overfit a limited physics prior.
-- Physical faithfulness is hard to evaluate in open-world scenes.
-- Video consistency still does not guarantee action-level controllability.
-
-## Relevance To World Models
-
-PhyWorld is a strong example of the shift from "video generation as media synthesis" to "video generation as simulation substrate." For robotics or companion robots, this direction matters because safe pre-deployment testing needs physically plausible imagined futures.
-
-## Product Implication
-
-For an embodied companion robot company, PhyWorld suggests a practical roadmap:
-
-- Start from a capable video model.
-- Fine-tune for scene continuation in target environments.
-- Add preference alignment around safety and physics.
-- Evaluate against interaction-specific physical rules, not only image quality.
+- 是否能结合 Cosmos、Genesis 等物理仿真生态。
+- 是否能加入动作条件，形成 world-action model。
+- 是否能在家庭交互、物体操作和人机社交场景中建立专门的物理一致性评估集。

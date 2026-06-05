@@ -1,64 +1,49 @@
-# 10. LongVie 2: Multimodal Controllable Ultra-Long Video World Model
+# 10. LongVie 2：超长视频生成与长时序一致性
 
-## Metadata
+## 基本信息
 
 - arXiv: https://arxiv.org/abs/2512.13604
 - PDF: `../papers/10_LongVie2_2512.13604.pdf`
-- Hugging Face model/project: https://huggingface.co/Vchitect/LongVie2
-- Topic: ultra-long video generation, controllable video world model, temporal consistency
+- 主题：超长视频生成、长时序一致性、跨片段记忆、可控视频世界模型
+- 关注度：5/5
 
-## Core Problem
+## 一句话总结
 
-Building a video world model on top of a pretrained video generator requires three properties:
+LongVie 2 聚焦超长视频生成中的一致性和漂移问题，对需要长期模拟和持续交互的世界模型非常重要。
 
-- Controllability.
-- Long-term visual quality.
-- Temporal consistency.
+## 核心问题
 
-Short clips can hide accumulated errors. Ultra-long generation exposes drift, degradation, subject inconsistency, and loss of control.
+短视频生成已经取得很大进展，但长视频仍然容易出现身份变化、场景漂移、动作断裂和语义遗忘。对于机器人和虚拟仿真来说，任务往往持续数分钟甚至更久，模型必须能记住此前状态并保持未来合理。
 
-## Main Idea
+## 方法理解
 
-LongVie 2 uses an end-to-end autoregressive framework with three stages:
+LongVie 2 关注长时序生成中的历史上下文、跨片段一致性和退化控制。它的核心不是单帧质量，而是如何让视频在更长时间尺度上维持角色、场景、物体和动作关系。
 
-- Multi-modal guidance to integrate dense and sparse controls.
-- Degradation-aware training to reduce train-test mismatch during long inference.
-- History-context guidance to align adjacent clips and preserve temporal consistency.
+从世界模型角度看，长视频生成就是长期 rollout。任何短期误差都会在多步预测中累积，因此长时序一致性是世界模型能否用于训练和仿真的关键。
 
-It also introduces LongVGenBench for evaluating high-resolution one-minute videos.
+## 实验与证据
 
-## Technical Reading
+论文展示了更长视频生成能力和跨片段一致性的提升。重要信号是：研究重点正在从“几秒钟漂亮视频”转向“更长时间、更稳定状态、更可控过程”。
 
-The paper is important because it attacks the long-horizon failure mode directly. The transition from five-second clips to one-minute or five-minute videos is not a scaling detail; it changes the nature of the problem. History context and degradation-aware training become central.
+## 优点
 
-The Hugging Face project card indicates model release and inference instructions, making this paper both a research and implementation reference.
+- 直接处理长时序漂移。
+- 对视频世界模型和仿真数据生成有价值。
+- 有助于建立长期交互和任务过程模拟。
+- 与记忆模块和分层规划可以结合。
 
-## Experiments And Evidence
+## 局限
 
-The paper reports strong performance in controllability, temporal coherence, visual fidelity, and extended generation. It also reports that all three training stages contribute to performance.
+- 长视频生成成本高。
+- 生成结果仍可能缺少真实物理可验证性。
+- 对交互式动作控制支持有限，需要和 world-action model 结合。
 
-## Strengths
+## 对具身智能的启示
 
-- Directly addresses ultra-long temporal consistency.
-- Uses multimodal control signals.
-- Includes benchmark construction.
-- Provides project/model resources.
+陪伴机器人的交互不是 5 秒短片，而是持续数小时、数天甚至数年的关系。LongVie 2 代表的长时序能力，可以帮助机器人模拟长期场景变化、生成训练数据、维护用户互动上下文，并减少短期模型带来的记忆断裂。
 
-## Limitations
+## 后续跟踪点
 
-- Heavy compute requirements.
-- Long-video benchmarks may still not reflect physical action consistency.
-- Visual coherence is not equivalent to accurate world simulation.
-
-## Relevance To World Models
-
-LongVie 2 represents the long-horizon video generation branch of world-model research. It is especially relevant for systems where a model must maintain scene identity and control over minutes, not seconds.
-
-## Product Implication
-
-For companion robots, long-horizon consistency matters for:
-
-- Remembering ongoing interaction state.
-- Maintaining user and object identity.
-- Generating training simulations over extended episodes.
-- Avoiding drift in multi-turn embodied scenarios.
+- 是否能和 TeleWorld 类 4D 记忆结合。
+- 是否能支持动作条件和用户意图控制。
+- 是否能用于生成机器人长期交互训练数据。

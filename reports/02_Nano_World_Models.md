@@ -1,66 +1,49 @@
-# 02. Nano World Models: A Minimalist Implementation of Future Video Prediction
+# 02. Nano World Models：极简未来视频预测世界模型
 
-## Metadata
+## 基本信息
 
 - arXiv: https://arxiv.org/abs/2605.23993
 - PDF: `../papers/02_Nano_World_Models_2605.23993.pdf`
-- Project direction: compact, reproducible world-model implementation
-- Topic: future video prediction, diffusion forcing, action conditioning, reproducible research
+- 主题：未来视频预测、扩散强制、动作条件、可复现实验框架
+- 关注度：4/5
 
-## Core Problem
+## 一句话总结
 
-World models are becoming large, expensive, and difficult to reproduce. Industry systems may show impressive interactive video generation, but academic and startup teams need small, controllable implementations for ablation, debugging, and architectural study.
+Nano World Models 的意义不在于追求最大规模，而在于提供一个小而清晰、便于复现和消融的世界模型实验平台。
 
-## Main Idea
+## 核心问题
 
-Nano World Models provides a compact experimental substrate for future video prediction. The project emphasizes:
+当前世界模型越来越大，训练成本越来越高，很多系统的细节难以复现。对研究团队和创业公司来说，仅仅知道一个大模型效果好并不够，更重要的是理解哪些设计真正有效：数据、模型结构、动作注入、采样步数、latent 表征、rollout 长度、评估协议分别起什么作用。
 
-- Unified interfaces for objectives and model scales.
-- Action-conditioning mechanisms.
-- Latent observation spaces.
-- Datasets and evaluation protocols.
-- Long-horizon rollout procedures.
+## 方法理解
 
-The paper's value is not only a new model; it is a reproducible framework for studying why world models work or fail.
+这项工作围绕未来视频预测构建极简实现，重点强调统一接口、动作条件、latent observation space、数据集配置和长时序 rollout。它试图把世界模型研究中的多个变量拆开，让研究者可以单独分析每个模块。
 
-## Technical Reading
+这种“nano”思路非常适合内部研究基础设施。相比直接追大模型，先用小系统理解误差累积、动作条件失效、长时序漂移和采样成本，往往更能指导后续扩展。
 
-The design is centered around future video prediction and diffusion forcing. The key engineering insight is that many world-model papers entangle too many decisions: dataset, architecture, conditioning, sampler, rollout length, and evaluation. Nano World Models tries to make these factors separable.
+## 实验与证据
 
-This matters because long-horizon rollout quality is sensitive to small implementation details. A compact codebase makes it easier to inspect error accumulation, action injection, and sampling budget trade-offs.
+论文覆盖简单控制环境、游戏模拟和真实机器人数据，观察不同预测参数化、模型规模、动作注入方式、采样预算和任务复杂度对 rollout 质量的影响。它更像一个实验基座，而不是单点 SOTA 模型。
 
-## Experiments And Evidence
+## 优点
 
-The work studies simple control environments, game simulation, and real-robot data. It examines how:
+- 可复现性高，适合作为内部 world model lab。
+- 便于做消融实验和工程调试。
+- 能连接控制环境、游戏和机器人数据。
+- 对算力有限的团队尤其有价值。
 
-- Prediction parameterization changes rollout behavior.
-- Architecture scale changes quality.
-- Action injection changes controllability.
-- Sampling budget changes inference cost.
-- Domain complexity changes robustness.
+## 局限
 
-## Strengths
+- 极简实现不一定能代表前沿大规模视频模型能力。
+- 小模型中的结论迁移到 DiT、多模态大模型时需要重新验证。
+- 更偏研究平台，不是直接可产品化的仿真系统。
 
-- High practical value for reproducible world-model research.
-- Useful for debugging and ablation.
-- Bridges small control tasks, games, and real-robot data.
-- Provides a foundation for internal company research infrastructure.
+## 对具身智能的启示
 
-## Limitations
+陪伴机器人公司可以把这类框架作为内部试验台，用来验证动作条件视频预测、用户互动模拟、策略学习和记忆模块。如果直接上大模型，很容易只看到结果，无法定位失败原因；而小模型能帮助团队更快建立工程直觉。
 
-- Minimalism means it may not match frontier-scale video systems.
-- Results from compact systems may not fully transfer to very large DiT or multimodal video models.
-- It is a research substrate more than a production simulator.
+## 后续跟踪点
 
-## Relevance To World Models
-
-Nano World Models is the "build your own world model lab" entry in this weekly batch. For teams without hyperscale compute, this may be more immediately useful than a larger model release.
-
-## Product Implication
-
-For robotics and companion AI, this kind of framework can become the internal testbed for:
-
-- Action-conditioned video prediction.
-- Simulated user-robot interaction.
-- Policy learning from video.
-- Ablating memory, action, and perception modules before scaling.
+- 是否能接入真实家庭视频和机器人操作数据。
+- 是否能加入语言指令和 VLA 输入。
+- 是否能形成稳定的内部 benchmark，用于每周评估新方法。
