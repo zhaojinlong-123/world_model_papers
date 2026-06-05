@@ -10,21 +10,21 @@
     <header class="site-header">
       <a class="brand" href="./index.html">World Model Weekly</a>
       <nav>
+        <a href="./index.html#weekly">本周汇总</a>
         <a href="./index.html#latest">本周热点</a>
         <a href="./index.html#papers">论文报告</a>
         <a href="./index.html#watchlist">重点机构</a>
         <a href="./index.html#interest">兴趣方向</a>
-        <a href="./index.html#trend">趋势总结</a>
       </nav>
     </header>
     <main class="page-shell">
       <section class="hero">
         <p class="eyebrow">World Model Weekly · 2026-06-04</p>
         <h1>世界模型、视频生成与具身智能论文周报</h1>
-        <p class="lead">每周聚合 arXiv、OpenReview、alphaXiv、Hugging Face 和机构技术报告，清晰展示本周最新热点、每篇论文分析和研究趋势。</p>
+        <p class="lead">每周聚合 arXiv、OpenReview、alphaXiv、Hugging Face 和重点机构发布，优先展示本周汇总、最新热点、论文分析和下周检索权重。</p>
         <div class="hero-actions">
-          <a class="button primary" href="#latest">查看本周热点</a>
-          <a class="button" href="weeks/2026-06-04.html">阅读本周汇总</a>
+          <a class="button primary" href="#weekly">先看本周汇总</a>
+          <a class="button" href="weeks/2026-06-04.html">打开完整中文周报</a>
         </div>
       </section>
 
@@ -37,29 +37,41 @@
         <p id="searchStatus" class="search-status">显示全部条目</p>
       </section>
 
+      <section id="weekly" class="section summary-panel">
+        <p class="eyebrow">Weekly First</p>
+        <h2>本周汇总</h2>
+        <p>本周最强信号是：世界模型正在从“生成好看的视频”转向“可用于物理推理、动作规划、长期记忆和交互仿真的系统”。对情感陪伴机器人来说，最值得投入的是可控视频世界模型、latent dynamics、VLA/world-action、长期场景记忆和低延迟部署。</p>
+        <div class="summary-grid">
+          <div><strong>核心趋势</strong><span>物理一致性、长时序一致性、动作条件预测、结构化 latent 和推理加速。</span></div>
+          <div><strong>产品启示</strong><span>世界模型应成为机器人内部仿真层，而不是单独的视频生成模块。</span></div>
+          <div><strong>检索修正</strong><span>Cosmos 3、SANA-WM、Gemma 4 进入热点/观察机制，重点机构发布强制召回。</span></div>
+        </div>
+        <a class="button primary" href="weeks/2026-06-04.html">阅读完整中文汇总</a>
+      </section>
+
       <section id="latest" class="section">
         <div class="section-heading">
           <p class="eyebrow">Latest Hotspots</p>
           <h2>本周最新热点</h2>
-          <p>这一栏专门放“本周必须注意”的模型、论文和项目，避免只按 arXiv PDF 批处理导致 Cosmos 3、SANA-WM 这类项目被漏掉。</p>
+          <p>这一栏专门放“本周必须注意”的模型、论文和项目，避免只按 PDF 批处理导致机构项目页被漏掉。</p>
         </div>
         <div class="hotspot-grid">
-          <article class="hotspot-card" data-search="Cosmos 3 本周强制热点 2026-06-01 发布，物理 AI 世界基础模型，应该进入修订版 Top 10。 hotspot institution world model video generation">
+          <article class="hotspot-card" data-search="Cosmos 3 本周强制热点 NVIDIA 物理 AI 世界基础模型方向，后续周报会强制召回 Cosmos / Physical AI / world foundation model 相关发布。 hotspot institution world model video generation">
             <p class="tag">本周强制热点</p>
             <h3>Cosmos 3</h3>
-            <p>2026-06-01 发布，物理 AI 世界基础模型，应该进入修订版 Top 10。</p>
+            <p>NVIDIA 物理 AI 世界基础模型方向，后续周报会强制召回 Cosmos / Physical AI / world foundation model 相关发布。</p>
             <a href="https://research.nvidia.com/labs/cosmos-lab/cosmos3" target="_blank" rel="noreferrer">查看来源</a>
           </article>
-          <article class="hotspot-card" data-search="SANA-WM 近期核心热点 2.6B 开源世界模型，720p / 1 分钟可控视频生成，应进入扩展口径 Top 10。 hotspot institution world model video generation">
+          <article class="hotspot-card" data-search="SANA-WM 近期核心热点 开源世界模型和可控视频生成方向，应该进入扩展口径 Top 10 或重点观察区。 hotspot institution world model video generation">
             <p class="tag">近期核心热点</p>
             <h3>SANA-WM</h3>
-            <p>2.6B 开源世界模型，720p / 1 分钟可控视频生成，应进入扩展口径 Top 10。</p>
+            <p>开源世界模型和可控视频生成方向，应该进入扩展口径 Top 10 或重点观察区。</p>
             <a href="https://arxiv.org/abs/2605.15178" target="_blank" rel="noreferrer">查看来源</a>
           </article>
-          <article class="hotspot-card" data-search="Gemma 4 附录观察 更偏语言/多模态推理底座，不应挤占世界模型/视频生成主榜，可放相关基础模型区。 hotspot institution world model video generation">
-            <p class="tag">附录观察</p>
+          <article class="hotspot-card" data-search="Gemma 4 相关基础模型观察 更偏语言/多模态推理底座，不直接挤占世界模型主榜，但会影响 VLA、规划和具身推理。 hotspot institution world model video generation">
+            <p class="tag">相关基础模型观察</p>
             <h3>Gemma 4</h3>
-            <p>更偏语言/多模态推理底座，不应挤占世界模型/视频生成主榜，可放相关基础模型区。</p>
+            <p>更偏语言/多模态推理底座，不直接挤占世界模型主榜，但会影响 VLA、规划和具身推理。</p>
             <a href="https://arxiv.org/abs/2604.07035" target="_blank" rel="noreferrer">查看来源</a>
           </article>
         </div>
@@ -69,166 +81,186 @@
         <div class="section-heading">
           <p class="eyebrow">Paper Reports</p>
           <h2>本周论文分析</h2>
-          <p>每篇论文都有独立网页和原始 PDF 链接，便于快速进入方法、实验、局限和产品启示。</p>
+          <p>每篇论文都有中文摘要、独立分析网页、原始 PDF 链接和可选择兴趣度。</p>
         </div>
         <div class="paper-grid">
-          <article class="paper-card" data-search="01 PhyWorld Physics World Model Near-week interest 5 物理一致性和 Physical AI 仿真高度相关 world model video generation paper report">
+          <article class="paper-card" data-search="01 PhyWorld Physics World Model Near-week 通过视频续写微调和物理偏好对齐，让视频生成模型更像可用于 Physical AI 的物理世界模拟器。 interest 5 物理一致性和 Physical AI 仿真高度相关 world model video generation paper report">
             <span class="paper-no">01</span>
             <div>
               <p class="tag">Physics World Model · Near-week</p>
               <h3>PhyWorld</h3>
+              <p class="paper-summary">通过视频续写微调和物理偏好对齐，让视频生成模型更像可用于 Physical AI 的物理世界模拟器。</p>
               <div class="interest-meter" aria-label="兴趣分 5 分">
-                <span>兴趣 5/5</span>
-                <i style="--score: 5"></i>
+                <span data-interest-text="01_PhyWorld" data-default-score="5">兴趣 5/5</span>
+                <i data-interest-bar="01_PhyWorld" data-default-score="5" style="--score: 5"></i>
               </div>
+              <div class="score-picker" aria-label="选择兴趣度"><button class="score-button" type="button" data-paper="01_PhyWorld" data-score="1" data-default-score="5">1</button><button class="score-button" type="button" data-paper="01_PhyWorld" data-score="2" data-default-score="5">2</button><button class="score-button" type="button" data-paper="01_PhyWorld" data-score="3" data-default-score="5">3</button><button class="score-button" type="button" data-paper="01_PhyWorld" data-score="4" data-default-score="5">4</button><button class="score-button" type="button" data-paper="01_PhyWorld" data-score="5" data-default-score="5">5</button></div>
               <p class="interest-reason">物理一致性和 Physical AI 仿真高度相关</p>
               <div class="card-actions">
                 <a href="papers/01_PhyWorld.html">分析报告</a>
-                <a href="../papers/01_PhyWorld_2605.19242.pdf" target="_blank" rel="noreferrer">PDF</a>
+                <a href="pdfs/01_PhyWorld_2605.19242.pdf" target="_blank" rel="noreferrer">PDF</a>
               </div>
             </div>
           </article>
-          <article class="paper-card" data-search="02 Nano World Models Reproducible WM Near-week interest 4 适合内部复现实验和方法消融 world model video generation paper report">
+          <article class="paper-card" data-search="02 Nano World Models Reproducible WM Near-week 提供极简未来视频预测实现，适合用作内部复现实验、消融分析和世界模型教学基线。 interest 4 适合内部复现实验和方法消融 world model video generation paper report">
             <span class="paper-no">02</span>
             <div>
               <p class="tag">Reproducible WM · Near-week</p>
               <h3>Nano World Models</h3>
+              <p class="paper-summary">提供极简未来视频预测实现，适合用作内部复现实验、消融分析和世界模型教学基线。</p>
               <div class="interest-meter" aria-label="兴趣分 4 分">
-                <span>兴趣 4/5</span>
-                <i style="--score: 4"></i>
+                <span data-interest-text="02_Nano_World_Models" data-default-score="4">兴趣 4/5</span>
+                <i data-interest-bar="02_Nano_World_Models" data-default-score="4" style="--score: 4"></i>
               </div>
+              <div class="score-picker" aria-label="选择兴趣度"><button class="score-button" type="button" data-paper="02_Nano_World_Models" data-score="1" data-default-score="4">1</button><button class="score-button" type="button" data-paper="02_Nano_World_Models" data-score="2" data-default-score="4">2</button><button class="score-button" type="button" data-paper="02_Nano_World_Models" data-score="3" data-default-score="4">3</button><button class="score-button" type="button" data-paper="02_Nano_World_Models" data-score="4" data-default-score="4">4</button><button class="score-button" type="button" data-paper="02_Nano_World_Models" data-score="5" data-default-score="4">5</button></div>
               <p class="interest-reason">适合内部复现实验和方法消融</p>
               <div class="card-actions">
                 <a href="papers/02_Nano_World_Models.html">分析报告</a>
-                <a href="../papers/02_Nano_World_Models_2605.23993.pdf" target="_blank" rel="noreferrer">PDF</a>
+                <a href="pdfs/02_Nano_World_Models_2605.23993.pdf" target="_blank" rel="noreferrer">PDF</a>
               </div>
             </div>
           </article>
-          <article class="paper-card" data-search="03 Residual Latent Action WM Robot Learning Recent interest 5 机器人策略学习和动作有用表征强相关 world model video generation paper report">
+          <article class="paper-card" data-search="03 Residual Latent Action WM Robot Learning Recent 学习视觉特征中的残差 latent action，使世界模型更贴近机器人策略学习和动作表征。 interest 5 机器人策略学习和动作有用表征强相关 world model video generation paper report">
             <span class="paper-no">03</span>
             <div>
               <p class="tag">Robot Learning · Recent</p>
               <h3>Residual Latent Action WM</h3>
+              <p class="paper-summary">学习视觉特征中的残差 latent action，使世界模型更贴近机器人策略学习和动作表征。</p>
               <div class="interest-meter" aria-label="兴趣分 5 分">
-                <span>兴趣 5/5</span>
-                <i style="--score: 5"></i>
+                <span data-interest-text="03_RLA_World_Model" data-default-score="5">兴趣 5/5</span>
+                <i data-interest-bar="03_RLA_World_Model" data-default-score="5" style="--score: 5"></i>
               </div>
+              <div class="score-picker" aria-label="选择兴趣度"><button class="score-button" type="button" data-paper="03_RLA_World_Model" data-score="1" data-default-score="5">1</button><button class="score-button" type="button" data-paper="03_RLA_World_Model" data-score="2" data-default-score="5">2</button><button class="score-button" type="button" data-paper="03_RLA_World_Model" data-score="3" data-default-score="5">3</button><button class="score-button" type="button" data-paper="03_RLA_World_Model" data-score="4" data-default-score="5">4</button><button class="score-button" type="button" data-paper="03_RLA_World_Model" data-score="5" data-default-score="5">5</button></div>
               <p class="interest-reason">机器人策略学习和动作有用表征强相关</p>
               <div class="card-actions">
                 <a href="papers/03_RLA_World_Model.html">分析报告</a>
-                <a href="../papers/03_Visual_Feature_RLA_2605.07079.pdf" target="_blank" rel="noreferrer">PDF</a>
+                <a href="pdfs/03_Visual_Feature_RLA_2605.07079.pdf" target="_blank" rel="noreferrer">PDF</a>
               </div>
             </div>
           </article>
-          <article class="paper-card" data-search="04 DriveDreamer-Policy World-Action Model Recent interest 5 世界模型和动作规划/VLA 融合 world model video generation paper report">
+          <article class="paper-card" data-search="04 DriveDreamer-Policy World-Action Model Recent 把几何约束、语言指令、世界预测和动作规划结合起来，是 world-action model 路线的重要样本。 interest 5 世界模型和动作规划/VLA 融合 world model video generation paper report">
             <span class="paper-no">04</span>
             <div>
               <p class="tag">World-Action Model · Recent</p>
               <h3>DriveDreamer-Policy</h3>
+              <p class="paper-summary">把几何约束、语言指令、世界预测和动作规划结合起来，是 world-action model 路线的重要样本。</p>
               <div class="interest-meter" aria-label="兴趣分 5 分">
-                <span>兴趣 5/5</span>
-                <i style="--score: 5"></i>
+                <span data-interest-text="04_DriveDreamer_Policy" data-default-score="5">兴趣 5/5</span>
+                <i data-interest-bar="04_DriveDreamer_Policy" data-default-score="5" style="--score: 5"></i>
               </div>
+              <div class="score-picker" aria-label="选择兴趣度"><button class="score-button" type="button" data-paper="04_DriveDreamer_Policy" data-score="1" data-default-score="5">1</button><button class="score-button" type="button" data-paper="04_DriveDreamer_Policy" data-score="2" data-default-score="5">2</button><button class="score-button" type="button" data-paper="04_DriveDreamer_Policy" data-score="3" data-default-score="5">3</button><button class="score-button" type="button" data-paper="04_DriveDreamer_Policy" data-score="4" data-default-score="5">4</button><button class="score-button" type="button" data-paper="04_DriveDreamer_Policy" data-score="5" data-default-score="5">5</button></div>
               <p class="interest-reason">世界模型和动作规划/VLA 融合</p>
               <div class="card-actions">
                 <a href="papers/04_DriveDreamer_Policy.html">分析报告</a>
-                <a href="../papers/04_DriveDreamer_Policy_2604.01765.pdf" target="_blank" rel="noreferrer">PDF</a>
+                <a href="pdfs/04_DriveDreamer_Policy_2604.01765.pdf" target="_blank" rel="noreferrer">PDF</a>
               </div>
             </div>
           </article>
-          <article class="paper-card" data-search="05 Latent Particle World Models Object-centric Recent core interest 4 结构化对象动态和决策学习有价值 world model video generation paper report">
+          <article class="paper-card" data-search="05 Latent Particle World Models Object-centric Recent core 用对象中心的 latent particle 表征建模动态，有助于把世界模型从像素预测推进到结构化状态预测。 interest 4 结构化对象动态和决策学习有价值 world model video generation paper report">
             <span class="paper-no">05</span>
             <div>
               <p class="tag">Object-centric · Recent core</p>
               <h3>Latent Particle World Models</h3>
+              <p class="paper-summary">用对象中心的 latent particle 表征建模动态，有助于把世界模型从像素预测推进到结构化状态预测。</p>
               <div class="interest-meter" aria-label="兴趣分 4 分">
-                <span>兴趣 4/5</span>
-                <i style="--score: 4"></i>
+                <span data-interest-text="05_Latent_Particle_World_Models" data-default-score="4">兴趣 4/5</span>
+                <i data-interest-bar="05_Latent_Particle_World_Models" data-default-score="4" style="--score: 4"></i>
               </div>
+              <div class="score-picker" aria-label="选择兴趣度"><button class="score-button" type="button" data-paper="05_Latent_Particle_World_Models" data-score="1" data-default-score="4">1</button><button class="score-button" type="button" data-paper="05_Latent_Particle_World_Models" data-score="2" data-default-score="4">2</button><button class="score-button" type="button" data-paper="05_Latent_Particle_World_Models" data-score="3" data-default-score="4">3</button><button class="score-button" type="button" data-paper="05_Latent_Particle_World_Models" data-score="4" data-default-score="4">4</button><button class="score-button" type="button" data-paper="05_Latent_Particle_World_Models" data-score="5" data-default-score="4">5</button></div>
               <p class="interest-reason">结构化对象动态和决策学习有价值</p>
               <div class="card-actions">
                 <a href="papers/05_Latent_Particle_World_Models.html">分析报告</a>
-                <a href="../papers/05_Latent_Particle_World_Models_2603.04553.pdf" target="_blank" rel="noreferrer">PDF</a>
+                <a href="pdfs/05_Latent_Particle_World_Models_2603.04553.pdf" target="_blank" rel="noreferrer">PDF</a>
               </div>
             </div>
           </article>
-          <article class="paper-card" data-search="06 ThinkJEPA VLM + JEPA Recent core interest 4 VLM 语义推理指导 latent world model world model video generation paper report">
+          <article class="paper-card" data-search="06 ThinkJEPA VLM + JEPA Recent core 利用 VLM 语义推理引导 JEPA 式 latent 预测，体现了视觉语言模型和世界模型的融合趋势。 interest 4 VLM 语义推理指导 latent world model world model video generation paper report">
             <span class="paper-no">06</span>
             <div>
               <p class="tag">VLM + JEPA · Recent core</p>
               <h3>ThinkJEPA</h3>
+              <p class="paper-summary">利用 VLM 语义推理引导 JEPA 式 latent 预测，体现了视觉语言模型和世界模型的融合趋势。</p>
               <div class="interest-meter" aria-label="兴趣分 4 分">
-                <span>兴趣 4/5</span>
-                <i style="--score: 4"></i>
+                <span data-interest-text="06_ThinkJEPA" data-default-score="4">兴趣 4/5</span>
+                <i data-interest-bar="06_ThinkJEPA" data-default-score="4" style="--score: 4"></i>
               </div>
+              <div class="score-picker" aria-label="选择兴趣度"><button class="score-button" type="button" data-paper="06_ThinkJEPA" data-score="1" data-default-score="4">1</button><button class="score-button" type="button" data-paper="06_ThinkJEPA" data-score="2" data-default-score="4">2</button><button class="score-button" type="button" data-paper="06_ThinkJEPA" data-score="3" data-default-score="4">3</button><button class="score-button" type="button" data-paper="06_ThinkJEPA" data-score="4" data-default-score="4">4</button><button class="score-button" type="button" data-paper="06_ThinkJEPA" data-score="5" data-default-score="4">5</button></div>
               <p class="interest-reason">VLM 语义推理指导 latent world model</p>
               <div class="card-actions">
                 <a href="papers/06_ThinkJEPA.html">分析报告</a>
-                <a href="../papers/06_ThinkJEPA_2603.22281.pdf" target="_blank" rel="noreferrer">PDF</a>
+                <a href="pdfs/06_ThinkJEPA_2603.22281.pdf" target="_blank" rel="noreferrer">PDF</a>
               </div>
             </div>
           </article>
-          <article class="paper-card" data-search="07 WorldCache Content-Aware Acceleration Recent core interest 4 世界模型部署和低延迟推理关键 world model video generation paper report">
+          <article class="paper-card" data-search="07 WorldCache Content-Aware Acceleration Recent core 根据内容变化动态复用计算，面向世界模型和视频生成的低延迟推理。 interest 4 世界模型部署和低延迟推理关键 world model video generation paper report">
             <span class="paper-no">07</span>
             <div>
               <p class="tag">Acceleration · Recent core</p>
               <h3>WorldCache Content-Aware</h3>
+              <p class="paper-summary">根据内容变化动态复用计算，面向世界模型和视频生成的低延迟推理。</p>
               <div class="interest-meter" aria-label="兴趣分 4 分">
-                <span>兴趣 4/5</span>
-                <i style="--score: 4"></i>
+                <span data-interest-text="07_WorldCache_Content_Aware" data-default-score="4">兴趣 4/5</span>
+                <i data-interest-bar="07_WorldCache_Content_Aware" data-default-score="4" style="--score: 4"></i>
               </div>
+              <div class="score-picker" aria-label="选择兴趣度"><button class="score-button" type="button" data-paper="07_WorldCache_Content_Aware" data-score="1" data-default-score="4">1</button><button class="score-button" type="button" data-paper="07_WorldCache_Content_Aware" data-score="2" data-default-score="4">2</button><button class="score-button" type="button" data-paper="07_WorldCache_Content_Aware" data-score="3" data-default-score="4">3</button><button class="score-button" type="button" data-paper="07_WorldCache_Content_Aware" data-score="4" data-default-score="4">4</button><button class="score-button" type="button" data-paper="07_WorldCache_Content_Aware" data-score="5" data-default-score="4">5</button></div>
               <p class="interest-reason">世界模型部署和低延迟推理关键</p>
               <div class="card-actions">
                 <a href="papers/07_WorldCache_Content_Aware.html">分析报告</a>
-                <a href="../papers/07_WorldCache_Content_Aware_2603.22286.pdf" target="_blank" rel="noreferrer">PDF</a>
+                <a href="pdfs/07_WorldCache_Content_Aware_2603.22286.pdf" target="_blank" rel="noreferrer">PDF</a>
               </div>
             </div>
           </article>
-          <article class="paper-card" data-search="08 WorldCache Token Caching Acceleration Recent core interest 4 token 级缓存可降低交互式世界模型成本 world model video generation paper report">
+          <article class="paper-card" data-search="08 WorldCache Token Caching Acceleration Recent core 从 token 层面做异构缓存，降低长视频和世界模型生成的重复计算成本。 interest 4 token 级缓存可降低交互式世界模型成本 world model video generation paper report">
             <span class="paper-no">08</span>
             <div>
               <p class="tag">Acceleration · Recent core</p>
               <h3>WorldCache Token Caching</h3>
+              <p class="paper-summary">从 token 层面做异构缓存，降低长视频和世界模型生成的重复计算成本。</p>
               <div class="interest-meter" aria-label="兴趣分 4 分">
-                <span>兴趣 4/5</span>
-                <i style="--score: 4"></i>
+                <span data-interest-text="08_WorldCache_Heterogeneous_Token" data-default-score="4">兴趣 4/5</span>
+                <i data-interest-bar="08_WorldCache_Heterogeneous_Token" data-default-score="4" style="--score: 4"></i>
               </div>
+              <div class="score-picker" aria-label="选择兴趣度"><button class="score-button" type="button" data-paper="08_WorldCache_Heterogeneous_Token" data-score="1" data-default-score="4">1</button><button class="score-button" type="button" data-paper="08_WorldCache_Heterogeneous_Token" data-score="2" data-default-score="4">2</button><button class="score-button" type="button" data-paper="08_WorldCache_Heterogeneous_Token" data-score="3" data-default-score="4">3</button><button class="score-button" type="button" data-paper="08_WorldCache_Heterogeneous_Token" data-score="4" data-default-score="4">4</button><button class="score-button" type="button" data-paper="08_WorldCache_Heterogeneous_Token" data-score="5" data-default-score="4">5</button></div>
               <p class="interest-reason">token 级缓存可降低交互式世界模型成本</p>
               <div class="card-actions">
                 <a href="papers/08_WorldCache_Heterogeneous_Token.html">分析报告</a>
-                <a href="../papers/08_WorldCache_Heterogeneous_Token_2603.06331.pdf" target="_blank" rel="noreferrer">PDF</a>
+                <a href="pdfs/08_WorldCache_Heterogeneous_Token_2603.06331.pdf" target="_blank" rel="noreferrer">PDF</a>
               </div>
             </div>
           </article>
-          <article class="paper-card" data-search="09 TeleWorld 4D World Model Background interest 5 4D 世界记忆和动态多模态合成非常关键 world model video generation paper report">
+          <article class="paper-card" data-search="09 TeleWorld 4D World Model Background 面向 4D 世界建模和长期场景记忆，为具身智能中的空间连续性和多视角一致性提供思路。 interest 5 4D 世界记忆和动态多模态合成非常关键 world model video generation paper report">
             <span class="paper-no">09</span>
             <div>
               <p class="tag">4D World Model · Background</p>
               <h3>TeleWorld</h3>
+              <p class="paper-summary">面向 4D 世界建模和长期场景记忆，为具身智能中的空间连续性和多视角一致性提供思路。</p>
               <div class="interest-meter" aria-label="兴趣分 5 分">
-                <span>兴趣 5/5</span>
-                <i style="--score: 5"></i>
+                <span data-interest-text="09_TeleWorld" data-default-score="5">兴趣 5/5</span>
+                <i data-interest-bar="09_TeleWorld" data-default-score="5" style="--score: 5"></i>
               </div>
+              <div class="score-picker" aria-label="选择兴趣度"><button class="score-button" type="button" data-paper="09_TeleWorld" data-score="1" data-default-score="5">1</button><button class="score-button" type="button" data-paper="09_TeleWorld" data-score="2" data-default-score="5">2</button><button class="score-button" type="button" data-paper="09_TeleWorld" data-score="3" data-default-score="5">3</button><button class="score-button" type="button" data-paper="09_TeleWorld" data-score="4" data-default-score="5">4</button><button class="score-button" type="button" data-paper="09_TeleWorld" data-score="5" data-default-score="5">5</button></div>
               <p class="interest-reason">4D 世界记忆和动态多模态合成非常关键</p>
               <div class="card-actions">
                 <a href="papers/09_TeleWorld.html">分析报告</a>
-                <a href="../papers/09_TeleWorld_2601.00051.pdf" target="_blank" rel="noreferrer">PDF</a>
+                <a href="pdfs/09_TeleWorld_2601.00051.pdf" target="_blank" rel="noreferrer">PDF</a>
               </div>
             </div>
           </article>
-          <article class="paper-card" data-search="10 LongVie 2 Ultra-long Video Background interest 5 长时序可控视频世界模型方向高度相关 world model video generation paper report">
+          <article class="paper-card" data-search="10 LongVie 2 Ultra-long Video Background 聚焦超长视频生成和跨片段一致性，对长时序模拟、交互记忆和陪伴机器人场景很有价值。 interest 5 长时序可控视频世界模型方向高度相关 world model video generation paper report">
             <span class="paper-no">10</span>
             <div>
               <p class="tag">Ultra-long Video · Background</p>
               <h3>LongVie 2</h3>
+              <p class="paper-summary">聚焦超长视频生成和跨片段一致性，对长时序模拟、交互记忆和陪伴机器人场景很有价值。</p>
               <div class="interest-meter" aria-label="兴趣分 5 分">
-                <span>兴趣 5/5</span>
-                <i style="--score: 5"></i>
+                <span data-interest-text="10_LongVie2" data-default-score="5">兴趣 5/5</span>
+                <i data-interest-bar="10_LongVie2" data-default-score="5" style="--score: 5"></i>
               </div>
+              <div class="score-picker" aria-label="选择兴趣度"><button class="score-button" type="button" data-paper="10_LongVie2" data-score="1" data-default-score="5">1</button><button class="score-button" type="button" data-paper="10_LongVie2" data-score="2" data-default-score="5">2</button><button class="score-button" type="button" data-paper="10_LongVie2" data-score="3" data-default-score="5">3</button><button class="score-button" type="button" data-paper="10_LongVie2" data-score="4" data-default-score="5">4</button><button class="score-button" type="button" data-paper="10_LongVie2" data-score="5" data-default-score="5">5</button></div>
               <p class="interest-reason">长时序可控视频世界模型方向高度相关</p>
               <div class="card-actions">
                 <a href="papers/10_LongVie2.html">分析报告</a>
-                <a href="../papers/10_LongVie2_2512.13604.pdf" target="_blank" rel="noreferrer">PDF</a>
+                <a href="pdfs/10_LongVie2_2512.13604.pdf" target="_blank" rel="noreferrer">PDF</a>
               </div>
             </div>
           </article>
@@ -239,7 +271,7 @@
         <div class="section-heading">
           <p class="eyebrow">Institution Watchlist</p>
           <h2>重点机构监控</h2>
-          <p>每周总结会优先扫描这些大型机构的论文、模型卡、技术报告、GitHub 和 Hugging Face 发布。大型机构的 world model / video generation / VLA / physical AI 相关发布会被强制召回到候选池。</p>
+          <p>每周总结会优先扫描这些大型机构的论文、模型卡、技术报告、GitHub 和 Hugging Face 发布。</p>
         </div>
         <div class="watch-grid">
           <article class="watch-card" data-search="NVIDIA Cosmos / SANA / Physical AI / video world models institution watchlist world model video generation VLA physical AI">
@@ -273,7 +305,7 @@
         <div class="section-heading">
           <p class="eyebrow">Interest Profile</p>
           <h2>兴趣方向与下周检索权重</h2>
-          <p>每篇论文和每个方向都会打兴趣分。下周检索时，高兴趣方向会获得更高关键词覆盖、更深来源扫描和更高入选权重。</p>
+          <p>点击每篇论文卡片上的 1-5 分即可在浏览器本地记录兴趣度。导出的 JSON 可用于下周更新 sources/interest_profile.json。</p>
         </div>
         <div class="interest-grid">
           <article class="interest-card" data-search="Physical AI world foundation models score 5 优先检索 Cosmos、Genesis、物理推理、具身仿真。 interest direction retrieval priority">
@@ -302,40 +334,32 @@
             <p>关注缓存、token skipping、蒸馏和低延迟部署。</p>
           </article>
         </div>
+        <div class="export-panel">
+          <button id="exportInterest" class="button" type="button">导出当前兴趣配置</button>
+          <pre id="interestExport" hidden></pre>
+        </div>
       </section>
 
       <section id="storage" class="section storage-panel">
         <p class="eyebrow">Storage Design</p>
         <h2>长期周报的轻量化存储策略</h2>
-        <p>每周 10 篇 PDF 会让仓库快速膨胀。当前策略是长期保存网页、Markdown 分析、来源链接和候选记录；PDF 只保留少量高价值精选，其余通过官方链接访问。</p>
-        <div class="storage-grid">
-          <div>
-            <strong>长期保存</strong>
-            <span>报告、网页、来源链接、候选元数据</span>
-          </div>
-          <div>
-            <strong>选择保存</strong>
-            <span>每周 3-5 篇关键 PDF，避免普通 Git 仓库过大</span>
-          </div>
-          <div>
-            <strong>本地缓存</strong>
-            <span>批量下载放入 local_cache/ 或 tmp_downloads/，不提交</span>
-          </div>
+        <p>长期保存网页、Markdown 分析、来源链接和候选记录；PDF 优先保留高价值精选，避免仓库持续膨胀。当前这 10 篇 PDF 已发布到网页，后续可按兴趣分保留。</p>
+        <div class="summary-grid">
+          <div><strong>长期保存</strong><span>报告、网页、来源链接、候选元数据</span></div>
+          <div><strong>选择保存</strong><span>每周 3-5 篇关键 PDF，普通 PDF 用官方链接访问</span></div>
+          <div><strong>本地缓存</strong><span>批量下载放入 local_cache/ 或 tmp_downloads/，不提交</span></div>
         </div>
-      </section>
-
-      <section id="trend" class="section trend-panel">
-        <p class="eyebrow">Trend</p>
-        <h2>本周研究趋势</h2>
-        <p>世界模型正在从“生成好看的视频”转向“可用于物理推理、动作规划、长期记忆和交互仿真的系统”。最强信号包括物理一致性、长时序视频、VLA/world-action 融合、结构化 latent 表征和推理加速。</p>
-        <a class="button primary" href="weeks/2026-06-04.html">打开完整汇总报告</a>
       </section>
     </main>
     <script>
       const searchInput = document.querySelector("#paperSearch");
       const clearButton = document.querySelector("#clearSearch");
       const searchStatus = document.querySelector("#searchStatus");
-      const cards = Array.from(document.querySelectorAll(".hotspot-card, .paper-card, .watch-card"));
+      const cards = Array.from(document.querySelectorAll(".hotspot-card, .paper-card, .watch-card, .interest-card"));
+      const scoreButtons = Array.from(document.querySelectorAll(".score-button"));
+      const exportButton = document.querySelector("#exportInterest");
+      const exportBox = document.querySelector("#interestExport");
+      const storageKey = "world-model-weekly-interest";
 
       function normalize(text) {
         return (text || "").toLowerCase().trim();
@@ -347,8 +371,7 @@
 
       function applySearch() {
         if (!searchInput || !searchStatus) return;
-        const query = normalize(searchInput.value);
-        const terms = query.split(/\s+/).filter(Boolean);
+        const terms = normalize(searchInput.value).split(/\s+/).filter(Boolean);
         let visibleCount = 0;
 
         cards.forEach((card) => {
@@ -360,12 +383,61 @@
         searchStatus.textContent = terms.length === 0 ? "显示全部条目" : "找到 " + visibleCount + " 个相关条目";
       }
 
+      function readScores() {
+        try {
+          return JSON.parse(localStorage.getItem(storageKey) || "{}");
+        } catch {
+          return {};
+        }
+      }
+
+      function writeScores(scores) {
+        localStorage.setItem(storageKey, JSON.stringify(scores));
+      }
+
+      function applyScores() {
+        const scores = readScores();
+        scoreButtons.forEach((button) => {
+          const selected = String(scores[button.dataset.paper] || button.dataset.defaultScore) === button.dataset.score;
+          button.classList.toggle("is-active", selected);
+          button.setAttribute("aria-pressed", selected ? "true" : "false");
+        });
+        document.querySelectorAll("[data-interest-text]").forEach((node) => {
+          const paper = node.dataset.interestText;
+          const defaultScore = node.dataset.defaultScore;
+          const score = scores[paper] || defaultScore;
+          node.textContent = "兴趣 " + score + "/5";
+        });
+        document.querySelectorAll("[data-interest-bar]").forEach((node) => {
+          const paper = node.dataset.interestBar;
+          const defaultScore = node.dataset.defaultScore;
+          node.style.setProperty("--score", scores[paper] || defaultScore);
+        });
+      }
+
+      scoreButtons.forEach((button) => {
+        button.addEventListener("click", () => {
+          const scores = readScores();
+          scores[button.dataset.paper] = Number(button.dataset.score);
+          scores.updated = new Date().toISOString();
+          writeScores(scores);
+          applyScores();
+        });
+      });
+
+      exportButton?.addEventListener("click", () => {
+        const scores = readScores();
+        exportBox.hidden = false;
+        exportBox.textContent = JSON.stringify(scores, null, 2);
+      });
+
       searchInput?.addEventListener("input", applySearch);
       clearButton?.addEventListener("click", () => {
         searchInput.value = "";
         applySearch();
         searchInput.focus();
       });
+      applyScores();
     </script>
   </body>
 </html>

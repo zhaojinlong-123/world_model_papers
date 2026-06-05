@@ -3,104 +3,85 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>2026-06-04 Weekly Summary</title>
+    <title>2026-06-04 中文周报</title>
     <link rel="stylesheet" href="../styles.css" />
   </head>
   <body>
     <header class="site-header">
       <a class="brand" href="../index.html">World Model Weekly</a>
       <nav>
+        <a href="../index.html#weekly">本周汇总</a>
         <a href="../index.html#latest">本周热点</a>
         <a href="../index.html#papers">论文报告</a>
         <a href="../index.html#watchlist">重点机构</a>
         <a href="../index.html#interest">兴趣方向</a>
-        <a href="../index.html#trend">趋势总结</a>
       </nav>
     </header>
     <main class="page-shell">
       <section class="paper-hero">
-        <a class="back-link" href="../index.html#trend">← 返回主页</a>
+        <a class="back-link" href="../index.html#weekly">返回主页</a>
         <p class="eyebrow">Weekly Summary</p>
-        <h1>2026-06-04 世界模型与视频生成周报</h1>
+        <h1>2026-06-04 世界模型与视频生成中文周报</h1>
       </section>
       <article class="article-body">
-<h1>Weekly Summary: World Models And Video Generation</h1>
-<p>Date: 2026-06-04</p>
-<h2>Selection Caveat</h2>
-<p>The requested sources were arXiv, OpenReview, alphaXiv, and Hugging Face. All four were accessible only through the local proxy. A strict one-week window from 2026-05-28 to 2026-06-04 did not provide 10 strong public papers directly matching &quot;world model + video generation.&quot; This report therefore uses a practical weekly research brief format:</p>
+<h1>2026-06-04 世界模型与视频生成中文周报</h1>
+<h2>本周总览</h2>
+<p>本周最强研究信号是：世界模型正在从“生成好看的视频”转向“可用于物理推理、动作规划、长期记忆和交互仿真的系统”。视频生成不再只是内容生产工具，而是在成为具身智能、机器人训练、虚拟测试和长期交互记忆的基础设施。</p>
+<p>严格按 2026-05-28 至 2026-06-04 的一周窗口，只依赖 arXiv、OpenReview、alphaXiv 和 Hugging Face 很难凑满 10 篇高质量且完全匹配“世界模型 + 视频生成”的公开论文。因此本周采用“热点周报”口径：优先收录近一周强相关论文，同时补入近期仍在发酵、对世界模型路线有关键影响的核心论文和项目。</p>
+<h2>本周最重要结论</h2>
 <ul>
-<li>Include the latest close-window paper, especially PhyWorld.</li>
-<li>Include papers recently surfaced/crawled by Hugging Face or alphaXiv.</li>
-<li>Include core 2026 and late-2025 papers that shape the current research trend.</li>
+<li>物理一致性正在成为视频世界模型的核心指标。PhyWorld、Cosmos 3 等方向说明，模型不仅要会生成，还要能保持状态、遵守动力学、支持仿真和规划。</li>
+<li>长时序一致性是机器人和陪伴场景的关键瓶颈。LongVie 2、TeleWorld 等工作都在处理长视频漂移、跨片段记忆和 4D 场景连续性。</li>
+<li>VLA、world-action model 和视频世界模型正在融合。DriveDreamer-Policy、RLA-WM 等工作把动作、策略和未来预测放到同一系统中。</li>
+<li>结构化 latent 表征仍然很重要。对象中心、粒子状态、JEPA 式预测比纯像素生成更适合控制、规划和快速推理。</li>
+<li>推理加速会决定世界模型能否进入产品。WorldCache 系列说明，缓存、token 复用、低延迟生成会成为工程落地的关键。</li>
 </ul>
-<h2>Papers Covered</h2>
-<p>1. PhyWorld: Physics-Faithful World Model for Video Generation</p>
-<p>2. Nano World Models: A Minimalist Implementation of Future Video Prediction</p>
-<p>3. Learning Visual Feature-Based World Models via Residual Latent Action</p>
-<p>4. DriveDreamer-Policy: A Geometry-Grounded World-Action Model</p>
-<p>5. Latent Particle World Models</p>
-<p>6. ThinkJEPA</p>
-<p>7. WorldCache: Content-Aware Caching</p>
-<p>8. WorldCache: Heterogeneous Token Caching</p>
-<p>9. TeleWorld</p>
-<p>10. LongVie 2</p>
-<h2>Main Research Trends</h2>
-<h3>1. World Models Are Moving Beyond Pretty Video</h3>
-<p>The central shift is from video generation as content synthesis to video generation as simulation. PhyWorld emphasizes physical faithfulness; DriveDreamer-Policy uses video prediction to improve planning; TeleWorld reconstructs generated streams into a persistent 4D state.</p>
-<p>This is a major conceptual change. The target is not only &quot;does the clip look good?&quot; but &quot;can the model preserve state, obey physics, support planning, and remain consistent over long horizons?&quot;</p>
-<h3>2. Long-Horizon Consistency Is Now A First-Class Problem</h3>
-<p>LongVie 2 and TeleWorld both attack long-horizon drift. The key failure mode is accumulated error across clips or interaction cycles. Methods now use history-context guidance, degradation-aware training, hierarchical planning, and persistent memory.</p>
-<p>For embodied AI, this is critical because interaction episodes are long. A companion robot does not operate in isolated five-second clips.</p>
-<h3>3. Latent And Feature-Based Models Are Competing With Pixel Generation</h3>
-<p>RLA-WM, ThinkJEPA, and LPWM show that world models do not need to generate pixels at every step. Feature dynamics, object-centric particles, and JEPA-style latent prediction may be more efficient and more useful for control.</p>
-<p>The likely future is hybrid:</p>
+<h2>10 篇论文一句话总结</h2>
 <ul>
-<li>Pixel/video generation for human inspection and high-fidelity simulation.</li>
-<li>Latent prediction for fast planning and control.</li>
-<li>Object-centric state for causal reasoning and memory.</li>
+<li>PhyWorld：通过视频续写微调和物理偏好对齐，让视频生成模型更像可用于 Physical AI 的物理世界模拟器。</li>
+<li>Nano World Models：提供极简未来视频预测实现，适合用作内部复现实验、消融分析和世界模型教学基线。</li>
+<li>Residual Latent Action World Model：学习视觉特征中的残差 latent action，使世界模型更贴近机器人策略学习和动作表征。</li>
+<li>DriveDreamer-Policy：把几何约束、语言指令、世界预测和动作规划结合起来，是 world-action model 路线的重要样本。</li>
+<li>Latent Particle World Models：用对象中心的 latent particle 表征建模动态，有助于把世界模型从像素预测推进到结构化状态预测。</li>
+<li>ThinkJEPA：利用 VLM 语义推理引导 JEPA 式 latent 预测，体现了视觉语言模型和世界模型的融合趋势。</li>
+<li>WorldCache Content-Aware：根据内容变化动态复用计算，面向世界模型和视频生成的低延迟推理。</li>
+<li>WorldCache Heterogeneous Token Caching：从 token 层面做异构缓存，降低长视频/世界模型生成的重复计算成本。</li>
+<li>TeleWorld：面向 4D 世界建模和长期场景记忆，为具身智能中的空间连续性和多视角一致性提供思路。</li>
+<li>LongVie 2：聚焦超长视频生成和跨片段一致性，对长时序模拟、交互记忆和陪伴机器人场景很有价值。</li>
 </ul>
-<h3>4. VLMs Are Becoming Semantic Guides For World Models</h3>
-<p>ThinkJEPA uses a VLM pathway to guide dense latent prediction. DriveDreamer-Policy uses language instruction and multimodal inputs within a world-action model. This indicates a convergence between VLM/VLA systems and video world models.</p>
-<p>For products, this matters because a robot needs both grounding and action. A pure video predictor may not understand intent; a pure VLM may not predict dynamics.</p>
-<h3>5. Inference Cost Is A Research Bottleneck</h3>
-<p>The two WorldCache papers highlight that world-model quality alone is insufficient. Interactive systems require low latency and manageable compute. Caching, token skipping, and dynamic reuse are becoming important parts of world-model research.</p>
-<p>This trend is especially relevant for robotics, where world models may need to run continuously or at least frequently during decision-making.</p>
-<h2>Implications For Robotics And Companion AI</h2>
-<p>For a company building emotional companion robots, the most relevant directions are:</p>
+<h2>对具身智能和情感陪伴机器人的启示</h2>
+<p>对于情感陪伴机器人，世界模型的价值不只是“想象未来画面”，而是帮助机器人理解家庭环境、预测用户行为、维护长期记忆、在行动前进行安全推演。比较务实的系统架构应该是分层的：感知模型负责理解当前环境，记忆模块保存用户和空间状态，latent world model 快速预测短期变化，视频世界模型用于可视化模拟和训练数据生成，动作策略模块负责真实控制，安全模块负责约束输出。</p>
+<p>这意味着公司内部研究不应只追一个大模型，而应同时建设仿真数据、物理一致性评估、长期记忆、动作条件预测和低延迟推理能力。</p>
+<h2>本周热点修正</h2>
+<p>Cosmos 3、SANA-WM 和 Gemma 4 没有进入最初 10 篇，是因为初版筛选更偏“可下载 PDF + 论文报告”的批处理流程，对机构项目页、模型发布页和非严格世界模型论文的召回不够强。修正后的策略是：</p>
 <ul>
-<li>Use latent/feature world models for fast internal prediction.</li>
-<li>Use video world models for simulation, demonstration, and human-visible imagination.</li>
-<li>Add physics/preference alignment before using generated futures for control.</li>
-<li>Build persistent 4D or object-centric memory for household scenes.</li>
-<li>Optimize inference aggressively, otherwise world models remain too slow for product use.</li>
+<li>NVIDIA、Google/DeepMind、Genesis、Qwen、DeepSeek、Seed/ByteDance 等重点机构发布强制进入候选池。</li>
+<li>Cosmos、SANA、Gemma、world foundation model、physical AI、video world model、VLA、world-action 等关键词提高权重。</li>
+<li>对本周没有 PDF 但项目影响力很高的发布，单独进入“本周热点”区，不再被 PDF 下载流程过滤掉。</li>
+<li>对 Gemma 4 这类更偏基础模型的工作，放入“相关基础模型观察”，不直接挤占世界模型主榜。</li>
 </ul>
-<h2>Most Actionable Papers</h2>
-<h3>For internal research infrastructure</h3>
-<p>Nano World Models. It offers a compact experimental platform and is likely the easiest to adapt for controlled internal experiments.</p>
-<h3>For robot policy learning</h3>
-<p>RLA-WM and LPWM. They both connect learned world models to action or decision-making, not just video generation.</p>
-<h3>For product-grade simulation quality</h3>
-<p>PhyWorld and LongVie 2. They address physical plausibility and long-horizon consistency, two major obstacles to practical simulation.</p>
-<h3>For real-time deployment</h3>
-<p>WorldCache papers. They directly reduce inference cost and should be studied if the company expects interactive world-model use.</p>
-<h2>Open Questions</h2>
+<h2>下周检索权重</h2>
+<p>下周应重点检索以下方向：Physical AI world foundation models、长时序视频世界模型、VLA/world-action model、对象中心 latent dynamics、世界模型推理加速、大型机构发布。网页上的兴趣度选择会记录到浏览器本地，便于下一轮人工调整检索偏好；仓库中的 `sources/interest_profile.json` 继续作为自动化检索的默认配置。</p>
+<h2>风险与开放问题</h2>
 <ul>
-<li>How should physical faithfulness be evaluated in open household scenes?</li>
-<li>Can latent world models preserve enough detail for emotional and social interaction?</li>
-<li>How can long-term user memory be connected to spatial world memory?</li>
-<li>What is the right boundary between cloud world modeling and on-device prediction?</li>
-<li>Can generated futures be trusted for safety-critical robot actions?</li>
+<li>开放家庭场景中的物理一致性如何评估，仍然没有统一标准。</li>
+<li>视频生成模型是否能安全用于机器人动作决策，需要额外安全约束。</li>
+<li>长期用户记忆、空间记忆和动态世界模型如何融合，是陪伴机器人产品的核心难题。</li>
+<li>云端大模型和端侧低延迟推理之间的边界，需要根据成本、隐私和实时性重新设计。</li>
 </ul>
-<h2>Bottom Line</h2>
-<p>This week’s research signal is clear: the field is converging on world models as embodied simulators. The strongest work no longer treats video generation as a standalone endpoint. Instead, it combines video, latent dynamics, physical alignment, semantic reasoning, action planning, memory, and inference optimization.</p>
-<p>For a companion robot company, the winning architecture is likely not one giant model. It is a layered system: perception, memory, latent dynamics, video imagination, action policy, and safety constraints working together.</p>
+<h2>本周结论</h2>
+<p>本周趋势可以概括为一句话：世界模型正在成为具身智能的“内部仿真层”。未来有价值的系统不会只生成视频，而会同时具备物理一致性、长期记忆、动作条件预测、语义理解和实时推理能力。对于情感陪伴机器人公司，最值得投入的是可控视频世界模型、latent dynamics、VLA/world-action、长期场景记忆和低延迟部署。</p>
       </article>
     </main>
     <script>
       const searchInput = document.querySelector("#paperSearch");
       const clearButton = document.querySelector("#clearSearch");
       const searchStatus = document.querySelector("#searchStatus");
-      const cards = Array.from(document.querySelectorAll(".hotspot-card, .paper-card, .watch-card"));
+      const cards = Array.from(document.querySelectorAll(".hotspot-card, .paper-card, .watch-card, .interest-card"));
+      const scoreButtons = Array.from(document.querySelectorAll(".score-button"));
+      const exportButton = document.querySelector("#exportInterest");
+      const exportBox = document.querySelector("#interestExport");
+      const storageKey = "world-model-weekly-interest";
 
       function normalize(text) {
         return (text || "").toLowerCase().trim();
@@ -112,8 +93,7 @@
 
       function applySearch() {
         if (!searchInput || !searchStatus) return;
-        const query = normalize(searchInput.value);
-        const terms = query.split(/\s+/).filter(Boolean);
+        const terms = normalize(searchInput.value).split(/\s+/).filter(Boolean);
         let visibleCount = 0;
 
         cards.forEach((card) => {
@@ -125,12 +105,61 @@
         searchStatus.textContent = terms.length === 0 ? "显示全部条目" : "找到 " + visibleCount + " 个相关条目";
       }
 
+      function readScores() {
+        try {
+          return JSON.parse(localStorage.getItem(storageKey) || "{}");
+        } catch {
+          return {};
+        }
+      }
+
+      function writeScores(scores) {
+        localStorage.setItem(storageKey, JSON.stringify(scores));
+      }
+
+      function applyScores() {
+        const scores = readScores();
+        scoreButtons.forEach((button) => {
+          const selected = String(scores[button.dataset.paper] || button.dataset.defaultScore) === button.dataset.score;
+          button.classList.toggle("is-active", selected);
+          button.setAttribute("aria-pressed", selected ? "true" : "false");
+        });
+        document.querySelectorAll("[data-interest-text]").forEach((node) => {
+          const paper = node.dataset.interestText;
+          const defaultScore = node.dataset.defaultScore;
+          const score = scores[paper] || defaultScore;
+          node.textContent = "兴趣 " + score + "/5";
+        });
+        document.querySelectorAll("[data-interest-bar]").forEach((node) => {
+          const paper = node.dataset.interestBar;
+          const defaultScore = node.dataset.defaultScore;
+          node.style.setProperty("--score", scores[paper] || defaultScore);
+        });
+      }
+
+      scoreButtons.forEach((button) => {
+        button.addEventListener("click", () => {
+          const scores = readScores();
+          scores[button.dataset.paper] = Number(button.dataset.score);
+          scores.updated = new Date().toISOString();
+          writeScores(scores);
+          applyScores();
+        });
+      });
+
+      exportButton?.addEventListener("click", () => {
+        const scores = readScores();
+        exportBox.hidden = false;
+        exportBox.textContent = JSON.stringify(scores, null, 2);
+      });
+
       searchInput?.addEventListener("input", applySearch);
       clearButton?.addEventListener("click", () => {
         searchInput.value = "";
         applySearch();
         searchInput.focus();
       });
+      applyScores();
     </script>
   </body>
 </html>
